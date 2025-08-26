@@ -51,25 +51,15 @@ function App() {
   ];
 
   const touristSpots = [
-    { name: '藩境神社', stamps: 1, distance: '0.3km', difficulty: '初級', type: 'shrine' },
-    { name: '古民家カフェ', stamps: 1, distance: '0.8km', difficulty: '初級', type: 'cafe' },
-    { name: '竹林の小径', stamps: 2, distance: '1.2km', difficulty: '中級', type: 'nature' },
-    { name: '展望台', stamps: 3, distance: '2.1km', difficulty: '上級', type: 'viewpoint' },
-    { name: 'セブンイレブン藩境店', distance: '0.5km', type: 'convenience' },
-    { name: 'ファミリーマート中央店', distance: '0.7km', type: 'convenience' },
+    // 現在地周辺のスポットが動的に追加される
   ];
 
   const diningSpots = [
-    { name: '和風カフェ 梅', rating: 4.8, cuisine: '和菓子・抹茶', coupon: true, distance: '0.4km' },
-    { name: '蕎麦処 竹の庵', rating: 4.6, cuisine: '手打ち蕎麦', coupon: false, distance: '0.9km' },
-    { name: '料亭 桜', rating: 4.9, cuisine: '会席料理', coupon: true, distance: '1.1km' },
-    { name: '茶房 風雅', rating: 4.7, cuisine: '抹茶・和スイーツ', coupon: true, distance: '0.6km' },
+    // 現在地周辺の飲食店が動的に追加される
   ];
 
   const bicycleStations = [
-    { name: '藩境駅前', available: 5, total: 8, distance: '0.2km', type: 'electric' },
-    { name: '神社前広場', available: 3, total: 6, distance: '0.4km', type: 'standard' },
-    { name: '竹林入口', available: 2, total: 4, distance: '1.0km', type: 'electric' },
+    // 現在地周辺の自転車ステーションが動的に追加される
   ];
 
   const renderHomeContent = () => (
@@ -112,7 +102,7 @@ function App() {
       <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">おすすめスポット</h3>
         <div className="space-y-2">
-          {touristSpotsData.filter(spot => spot.type !== 'convenience').slice(0, 3).map((spot, index) => (
+          {touristSpotsData.length > 0 ? touristSpotsData.filter(spot => spot.type !== 'convenience').slice(0, 3).map((spot, index) => (
             <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
               <div>
                 <p className="font-medium text-sm">{spot.name}</p>
@@ -125,7 +115,12 @@ function App() {
                 </div>
               )}
             </div>
-          ))}
+          )) : (
+            <div className="text-center py-4 text-gray-500">
+              <p className="text-sm">現在地を取得中...</p>
+              <p className="text-xs mt-1">位置情報を許可してください</p>
+            </div>
+          )}
         </div>
       </div>
 

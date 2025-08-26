@@ -126,8 +126,9 @@ const LocationButton: React.FC<{ onLocationFound?: (lat: number, lng: number) =>
 };
 
 const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ spots, onSpotClick, userLocation }) => {
-  // 藩境のまちの中心座標
-  const center: [number, number] = [33.5904, 130.4017];
+  // デフォルト中心座標（現在地が取得できない場合は東京駅）
+  const defaultCenter: [number, number] = [35.6812, 139.7671];
+  const center: [number, number] = userLocation ? [userLocation.lat, userLocation.lng] : defaultCenter;
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -144,7 +145,7 @@ const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ spots, onSpotClick, userL
     <div className="relative">
       <MapContainer
         center={center}
-        zoom={13}
+        zoom={userLocation ? 16 : 13}
         style={{ height: '320px', width: '100%' }}
         className="rounded-lg border-2 border-gray-200"
       >
