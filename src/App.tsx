@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Map, MapPin, Camera, Recycle as Bicycle, Coffee, Star, Award, Navigation, Store, Clock, Users } from 'lucide-react';
-import GoogleMap from './components/GoogleMap';
+import OpenStreetMap from './components/OpenStreetMap';
 import { touristSpotsData, TouristSpot } from './data/touristSpots';
 
 function App() {
@@ -127,7 +127,7 @@ function App() {
           <h2 className="text-lg font-bold text-gray-800">観光マップ</h2>
           <Navigation className="w-5 h-5 text-indigo-600" />
         </div>
-        <GoogleMap 
+        <OpenStreetMap 
           spots={touristSpotsData} 
           onSpotClick={(spot) => setSelectedSpot(spot)}
         />

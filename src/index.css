@@ -192,3 +192,14 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--japan-red);
 }
+
+/* Leaflet マーカーのカスタムスタイル */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.current-location-marker {
+  background: transparent !important;
+  border: none !important;
+}
