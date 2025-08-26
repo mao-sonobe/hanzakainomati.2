@@ -325,7 +325,7 @@ function App() {
       <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">利用可能ステーション</h3>
         <div className="space-y-3">
-          {bicycleStations.map((station, index) => (
+          {bicycleStations.length > 0 ? bicycleStations.map((station, index) => (
             <div key={index} className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
               <div className="flex-1">
                 <div className="flex items-center mb-1">
@@ -343,7 +343,12 @@ function App() {
                 予約
               </button>
             </div>
-          ))}
+          )) : (
+            <div className="japanese-card p-4 text-center">
+              <p className="text-gray-500">現在地周辺の自転車ステーションを検索中...</p>
+              <p className="text-sm text-gray-400 mt-1">位置情報を許可してください</p>
+            </div>
+          )}
         </div>
       </div>
 
