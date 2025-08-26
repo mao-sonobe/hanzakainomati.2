@@ -237,12 +237,6 @@ function App() {
                     <span className="text-sm font-medium">+{spot.stamps} スタンプ</span>
                   </div>
                 )}
-                {spot.rating && (
-                  <div className="flex items-center mt-1">
-                    <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                    <span className="text-sm">{spot.rating}</span>
-                  </div>
-                )}
                 {spot.coupon && (
                   <span className="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mt-1">
                     クーポンあり
