@@ -25,11 +25,11 @@ function App() {
   ];
 
   const touristSpots = [
-    { name: '藩境野神社', stamps: 1, distance: '0.3km', difficulty: '初級', type: 'shrine' },
+    { name: '藩境神社', stamps: 1, distance: '0.3km', difficulty: '初級', type: 'shrine' },
     { name: '古民家カフェ', stamps: 1, distance: '0.8km', difficulty: '初級', type: 'cafe' },
     { name: '竹林の小径', stamps: 2, distance: '1.2km', difficulty: '中級', type: 'nature' },
     { name: '展望台', stamps: 3, distance: '2.1km', difficulty: '上級', type: 'viewpoint' },
-    { name: 'セブンイレブン藩境野店', distance: '0.5km', type: 'convenience' },
+    { name: 'セブンイレブン藩境店', distance: '0.5km', type: 'convenience' },
     { name: 'ファミリーマート中央店', distance: '0.7km', type: 'convenience' },
   ];
 
@@ -41,7 +41,7 @@ function App() {
   ];
 
   const bicycleStations = [
-    { name: '藩境野駅前', available: 5, total: 8, distance: '0.2km', type: 'electric' },
+    { name: '藩境駅前', available: 5, total: 8, distance: '0.2km', type: 'electric' },
     { name: '神社前広場', available: 3, total: 6, distance: '0.4km', type: 'standard' },
     { name: '竹林入口', available: 2, total: 4, distance: '1.0km', type: 'electric' },
   ];
@@ -108,7 +108,7 @@ function App() {
             <Camera className="w-4 h-4 text-red-600 mr-2" />
             <span className="font-medium text-sm">AR神社体験</span>
           </div>
-          <p className="text-xs text-gray-600 mb-2">藩境野神社でAR技術による歴史解説を体験できます</p>
+          <p className="text-xs text-gray-600 mb-2">藩境神社でAR技術による歴史解説を体験できます</p>
           <button className="hanko-button w-8 h-8 text-xs font-bold text-red-600">体験</button>
         </div>
       </div>
@@ -251,7 +251,7 @@ function App() {
     <div className="space-y-4">
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 border-2 border-green-200 washi-texture">
         <h2 className="text-lg font-bold text-gray-800 mb-2">自転車シェア</h2>
-        <p className="text-sm text-gray-600 mb-3">エコな移動で藩境野のまちを巡ろう</p>
+        <p className="text-sm text-gray-600 mb-3">エコな移動で藩境のまちを巡ろう</p>
       </div>
 
       <div className="japanese-card p-4">
@@ -404,7 +404,7 @@ function App() {
           <div className="flex items-center p-2 bg-red-50 rounded">
             <Award className="w-4 h-4 text-red-600 mr-3" />
             <div className="flex-1">
-              <p className="text-sm font-medium">藩境野神社でスタンプ獲得</p>
+              <p className="text-sm font-medium">藩境神社でスタンプ獲得</p>
               <p className="text-xs text-gray-600">2024/01/15 14:30</p>
             </div>
           </div>
@@ -488,7 +488,7 @@ function App() {
             <h1 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold`}>Tourism Mobility App</h1>
             <div className="flex items-center space-x-2">
               <Clock className="w-4 h-4" />
-              <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>藩境野のまち</span>
+              <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>藩境のまち</span>
             </div>
           </div>
         </div>
