@@ -31,10 +31,10 @@ function App() {
         },
         (error) => {
           console.log('位置情報の取得に失敗しました:', error.message);
-          // 位置情報が取得できない場合は藩境のまち中心部をデフォルトに設定
+          // 位置情報が取得できない場合は東京駅をデフォルトに設定
           setUserLocation({
-            lat: 33.6064,
-            lng: 130.4178
+            lat: 35.6812,
+            lng: 139.7671
           });
         },
         {
@@ -44,10 +44,10 @@ function App() {
         }
       );
     } else {
-      // Geolocationがサポートされていない場合も藩境のまち中心部を設定
+      // Geolocationがサポートされていない場合も東京駅を設定
       setUserLocation({
-        lat: 33.6064,
-        lng: 130.4178
+        lat: 35.6812,
+        lng: 139.7671
       });
     }
   }, []);
