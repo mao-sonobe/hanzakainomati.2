@@ -51,7 +51,7 @@ function App() {
       <div className="relative h-48 bg-gradient-to-r from-indigo-900 via-indigo-800 to-red-900 rounded-lg overflow-hidden washi-texture">
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         <div className="relative p-6 text-white">
-          <h1 className="text-2xl font-bold mb-2">藩境野のまち</h1>
+          <h1 className="text-2xl font-bold mb-2">藩境のまち</h1>
           <p className="text-sm opacity-90">伝統と自然が織りなす観光体験</p>
           <div className="absolute bottom-4 right-4 bg-white bg-opacity-20 backdrop-blur rounded-lg p-2">
             <p className="text-xs">獲得スタンプ: {userStamps}/12</p>
