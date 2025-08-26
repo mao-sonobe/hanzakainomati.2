@@ -5,6 +5,15 @@ function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [userStamps, setUserStamps] = useState(3);
   const [userCoupons, setUserCoupons] = useState(2);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const navigationItems = [
     { id: 'home', icon: Map, label: 'ホーム' },
@@ -472,48 +481,86 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-red-50 to-indigo-50">
-      <div className="max-w-md mx-auto bg-white shadow-lg min-h-screen">
+      <div className={`${isMobile ? 'max-w-md' : 'max-w-6xl'} mx-auto bg-white shadow-lg min-h-screen`}>
         {/* Header */}
-        <div className="japanese-gradient text-white p-4 sticky top-0 z-10">
+        <div className={`japanese-gradient text-white ${isMobile ? 'p-4' : 'p-6'} sticky top-0 z-10`}>
           <div className="flex items-center justify-between">
-            <h1 className="text-lg font-bold">Tourism Mobility App</h1>
+            <h1 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold`}>Tourism Mobility App</h1>
             <div className="flex items-center space-x-2">
               <Clock className="w-4 h-4" />
-              <span className="text-sm">藩境野のまち</span>
+              <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>藩境野のまち</span>
             </div>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-4 pb-20">
-          {renderContent()}
+        <div className={`${isMobile ? 'p-4 pb-20' : 'p-8 pb-8'}`}>
+          {isMobile ? (
+            renderContent()
+          ) : (
+            <div className="grid grid-cols-12 gap-8">
+              {/* Desktop Sidebar Navigation */}
+              <div className="col-span-3">
+                <div className="japanese-card p-6 sticky top-24">
+                  <h2 className="text-xl font-bold text-gray-800 mb-6 bamboo-border pl-3">メニュー</h2>
+                  <nav className="space-y-2">
+                    {navigationItems.map((item) => {
+                      const Icon = item.icon;
+                      const isActive = activeTab === item.id;
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => setActiveTab(item.id)}
+                          className={`w-full flex items-center p-3 rounded-lg transition-colors text-left ${
+                            isActive 
+                              ? 'bg-indigo-100 text-indigo-700 border-l-4 border-indigo-700' 
+                              : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                          }`}
+                        >
+                          <Icon className={`w-5 h-5 mr-3 ${isActive ? 'text-indigo-700' : 'text-gray-600'}`} />
+                          <span className="font-medium">{item.label}</span>
+                        </button>
+                      );
+                    })}
+                  </nav>
+                </div>
+              </div>
+              
+              {/* Desktop Main Content */}
+              <div className="col-span-9">
+                {renderContent()}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Bottom Navigation */}
-        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md">
-          <div className="bg-white border-t border-gray-200 px-2 py-2">
-            <div className="grid grid-cols-6 gap-1">
-              {navigationItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeTab === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveTab(item.id)}
-                    className={`flex flex-col items-center py-2 px-1 rounded-lg transition-colors ${
-                      isActive 
-                        ? 'bg-indigo-100 text-indigo-700' 
-                        : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
-                    }`}
-                  >
-                    <Icon className={`w-5 h-5 mb-1 ${isActive ? 'text-indigo-700' : 'text-gray-600'}`} />
-                    <span className="text-xs font-medium">{item.label}</span>
-                  </button>
-                );
-              })}
+        {isMobile && (
+          <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md">
+            <div className="bg-white border-t border-gray-200 px-2 py-2">
+              <div className="grid grid-cols-6 gap-1">
+                {navigationItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = activeTab === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => setActiveTab(item.id)}
+                      className={`flex flex-col items-center py-2 px-1 rounded-lg transition-colors ${
+                        isActive 
+                          ? 'bg-indigo-100 text-indigo-700' 
+                          : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                      }`}
+                    >
+                      <Icon className={`w-5 h-5 mb-1 ${isActive ? 'text-indigo-700' : 'text-gray-600'}`} />
+                      <span className="text-xs font-medium">{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

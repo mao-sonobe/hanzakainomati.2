@@ -128,6 +128,53 @@ body {
   }
 }
 
+/* デスクトップ対応 */
+@media (min-width: 768px) {
+  .japanese-card {
+    margin: 0;
+    padding: 1.5rem;
+  }
+  
+  .washi-texture {
+    background-size: 30px 30px;
+  }
+  
+  .sakura-petal {
+    width: 8px;
+    height: 8px;
+  }
+  
+  /* デスクトップ用グリッドレイアウト */
+  .desktop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  /* デスクトップ用カードサイズ調整 */
+  .desktop-card {
+    min-height: 200px;
+  }
+  
+  /* デスクトップ用ナビゲーション */
+  .desktop-nav {
+    position: sticky;
+    top: 6rem;
+    height: fit-content;
+  }
+}
+
+@media (min-width: 1024px) {
+  .japanese-card {
+    padding: 2rem;
+  }
+  
+  /* 大画面用レイアウト調整 */
+  .large-screen-layout {
+    max-width: 1400px;
+  }
+}
+
 /* スクロールバーのカスタマイズ */
 ::-webkit-scrollbar {
   width: 6px;
