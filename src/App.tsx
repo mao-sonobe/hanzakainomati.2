@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Map, MapPin, Camera, Recycle as Bicycle, Coffee, Star, Award, Navigation, Store, Clock, Users } from 'lucide-react';
 import OpenStreetMap from './components/OpenStreetMap';
+import TextToSpeech from './components/TextToSpeech';
+import GoogleMapsButton from './components/GoogleMapsButton';
 import { touristSpotsData, TouristSpot } from './data/touristSpots';
 
 function App() {
@@ -189,23 +191,39 @@ function App() {
         <h3 className="font-semibold text-gray-800 bamboo-border pl-3">観光スポット一覧</h3>
         {touristSpotsData.map((spot, index) => (
           <div key={index} className="japanese-card p-4">
+            {/* 音声読み上げ機能 */}
+            <div className="flex justify-between items-start mb-3">
+              <h4 className="font-medium text-gray-800 flex-1">{spot.name}</h4>
+              <TextToSpeech 
+                text={`${spot.name}。${spot.description}`}
+                language="ja"
+                className="ml-2"
+              />
+            </div>
+            
             <div className="flex justify-between items-start">
               <div className="flex-1">
-                <div className="flex items-center mb-1">
-                  <h4 className="font-medium text-gray-800">{spot.name}</h4>
+                <div className="flex items-center mb-2">
                   {spot.type === 'convenience' ? (
-                    <Store className="w-4 h-4 text-blue-600 ml-2" />
+                    <Store className="w-4 h-4 text-blue-600 mr-2" />
                   ) : spot.type === 'cafe' ? (
-                    <Coffee className="w-4 h-4 text-orange-600 ml-2" />
+                    <Coffee className="w-4 h-4 text-orange-600 mr-2" />
                   ) : spot.type === 'shrine' ? (
-                    <span className="ml-2">⛩️</span>
+                    <span className="mr-2">⛩️</span>
                   ) : spot.type === 'nature' ? (
-                    <span className="ml-2">🌿</span>
+                    <span className="mr-2">🌿</span>
                   ) : spot.type === 'viewpoint' ? (
-                    <span className="ml-2">🏔️</span>
+                    <span className="mr-2">🏔️</span>
                   ) : null}
+                  <span className="text-sm text-gray-500">
+                    {spot.type === 'viewpoint' ? '歴史的建造物' : 
+                     spot.type === 'shrine' ? '神社・寺院' :
+                     spot.type === 'cafe' ? 'カフェ・飲食' :
+                     spot.type === 'nature' ? '自然スポット' :
+                     spot.type === 'convenience' ? 'コンビニ' : '観光スポット'}
+                  </span>
                 </div>
-                <p className="text-sm text-gray-600 mt-1">{spot.description}</p>
+                <p className="text-sm text-gray-600 mt-2 leading-relaxed">{spot.description}</p>
                 {spot.distance && (
                   <p className="text-xs text-gray-500 mt-1">{spot.distance}</p>
                 )}
@@ -230,11 +248,16 @@ function App() {
                   </span>
                 )}
               </div>
+            </div>
+            
+            {/* Google Mapsボタンとナビボタン */}
+            <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-100">
+              <GoogleMapsButton lat={spot.lat} lng={spot.lng} name={spot.name} />
               <button 
                 onClick={() => setSelectedSpot(spot)}
-                className="bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700 transition-colors"
+                className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors"
               >
-                ナビ開始
+                詳細表示
               </button>
             </div>
           </div>

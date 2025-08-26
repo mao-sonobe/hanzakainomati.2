@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, Navigation } from 'lucide-react';
+import TextToSpeech from './TextToSpeech';
+import GoogleMapsButton from './GoogleMapsButton';
 
 // Leafletのデフォルトアイコンの問題を修正
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -168,12 +170,24 @@ const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ spots, onSpotClick, userL
             }}
           >
             <Popup>
-              <div style={{ padding: '8px', minWidth: '200px', fontFamily: "'Noto Serif JP', serif" }}>
+              <div style={{ padding: '12px', minWidth: '280px', fontFamily: "'Noto Serif JP', serif" }}>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
                   <span style={{ fontSize: '20px', marginRight: '8px' }}>{getTypeIcon(spot.type)}</span>
                   <h3 style={{ margin: '0', color: '#2e4057', fontSize: '16px' }}>{spot.name}</h3>
                 </div>
-                <p style={{ margin: '4px 0', color: '#666', fontSize: '14px' }}>{spot.description}</p>
+                
+                {/* 音声読み上げ機能 */}
+                <div style={{ marginBottom: '8px' }}>
+                  <TextToSpeech 
+                    text={`${spot.name}。${spot.description}`}
+                    language="ja"
+                  />
+                </div>
+                
+                <p style={{ margin: '8px 0', color: '#666', fontSize: '14px', lineHeight: '1.4' }}>
+                  {spot.description}
+                </p>
+                
                 {spot.stamps && (
                   <div style={{ display: 'flex', alignItems: 'center', margin: '4px 0' }}>
                     <span style={{ color: '#c73e1d', marginRight: '4px' }}>🏆</span>
@@ -196,6 +210,11 @@ const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ spots, onSpotClick, userL
                     <span style={{ fontSize: '12px', color: '#c73e1d' }}>🎫 クーポンあり</span>
                   </div>
                 )}
+                
+                {/* Google Mapsボタン */}
+                <div style={{ marginTop: '12px', paddingTop: '8px', borderTop: '1px solid #eee' }}>
+                  <GoogleMapsButton lat={spot.lat} lng={spot.lng} name={spot.name} />
+                </div>
               </div>
             </Popup>
           </Marker>
