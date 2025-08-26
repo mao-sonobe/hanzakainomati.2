@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
-import { MapPin, Star, Award, Coffee, Store, Camera } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 interface TouristSpot {
   id: string;
@@ -24,7 +24,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
-  const [selectedSpot, setSelectedSpot] = useState<TouristSpot | null>(null);
+  // const [selectedSpot, setSelectedSpot] = useState<TouristSpot | null>(null);
 
   // 藩境のまちの中心座標（例：福岡県の座標）
   const center = { lat: 33.5904, lng: 130.4017 };
@@ -87,7 +87,6 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
 
             marker.addListener('click', () => {
               infoWindow.open(mapInstance, marker);
-              setSelectedSpot(spot);
               onSpotClick?.(spot);
             });
 
@@ -110,7 +109,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
   }, [spots, onSpotClick]);
 
   const getMarkerIcon = (type: string) => {
-    const iconBase = 'data:image/svg+xml;base64,';
+  // const iconBase = 'data:image/svg+xml;base64,';
     let color = '#2e4057';
     let symbol = '📍';
 
