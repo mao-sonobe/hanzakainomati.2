@@ -200,12 +200,6 @@ const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ spots, onSpotClick, userL
                     難易度: {spot.difficulty}
                   </div>
                 )}
-                {spot.rating && (
-                  <div style={{ display: 'flex', alignItems: 'center', margin: '4px 0' }}>
-                    <span style={{ color: '#daa520', marginRight: '4px' }}>⭐</span>
-                    <span style={{ fontSize: '12px' }}>{spot.rating}</span>
-                  </div>
-                )}
                 {spot.coupon && (
                   <div style={{ background: '#ffb7c5', padding: '4px 8px', borderRadius: '4px', marginTop: '8px' }}>
                     <span style={{ fontSize: '12px', color: '#c73e1d' }}>🎫 クーポンあり</span>
