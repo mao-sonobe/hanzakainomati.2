@@ -32,7 +32,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
   useEffect(() => {
     const initMap = async () => {
       const loader = new Loader({
-        apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY_HERE',
+        apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY_HERE',
         version: 'weekly',
         libraries: ['places']
       });
@@ -250,13 +250,13 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
       </div>
 
       {/* API Key警告 */}
-      {(!process.env.REACT_APP_GOOGLE_MAPS_API_KEY || process.env.REACT_APP_GOOGLE_MAPS_API_KEY === 'YOUR_API_KEY_HERE') && (
+      {(!import.meta.env.VITE_GOOGLE_MAPS_API_KEY || import.meta.env.VITE_GOOGLE_MAPS_API_KEY === 'YOUR_API_KEY_HERE') && (
         <div className="absolute inset-0 bg-gray-100 rounded-lg flex items-center justify-center">
           <div className="text-center p-4">
             <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
             <p className="text-gray-600 text-sm mb-2">Google Maps API Keyが必要です</p>
             <p className="text-xs text-gray-500">
-              .envファイルにREACT_APP_GOOGLE_MAPS_API_KEYを設定してください
+              .envファイルにVITE_GOOGLE_MAPS_API_KEYを設定してください
             </p>
           </div>
         </div>

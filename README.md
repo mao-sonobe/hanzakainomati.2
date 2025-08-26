@@ -13,7 +13,7 @@
 
  ### **スタンプ機能**
 @@ .. @@
- npm run dev
+VITE_GOOGLE_MAPS_API_KEY=your_api_key_here
  ```
 
 +### **Google Maps API設定**
