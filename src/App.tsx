@@ -31,6 +31,11 @@ function App() {
         },
         (error) => {
           console.log('位置情報の取得に失敗しました:', error.message);
+          // 位置情報が取得できない場合は藩境のまち中心部をデフォルトに設定
+          setUserLocation({
+            lat: 33.6064,
+            lng: 130.4178
+          });
         },
         {
           enableHighAccuracy: true,
@@ -38,6 +43,12 @@ function App() {
           maximumAge: 300000 // 5分間キャッシュ
         }
       );
+    } else {
+      // Geolocationがサポートされていない場合も藩境のまち中心部を設定
+      setUserLocation({
+        lat: 33.6064,
+        lng: 130.4178
+      });
     }
   }, []);
 
@@ -102,11 +113,11 @@ function App() {
       <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">おすすめスポット</h3>
         <div className="space-y-2">
-          {touristSpotsData.length > 0 ? touristSpotsData.filter(spot => spot.type !== 'convenience').slice(0, 3).map((spot, index) => (
+          {touristSpotsData.filter(spot => spot.type !== 'convenience').slice(0, 3).map((spot, index) => (
             <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
               <div>
                 <p className="font-medium text-sm">{spot.name}</p>
-                <p className="text-xs text-gray-600">{spot.distance}{spot.difficulty ? ` • ${spot.difficulty}` : ''}</p>
+                <p className="text-xs text-gray-600">{spot.difficulty ? `${spot.difficulty}` : ''}</p>
               </div>
               {spot.stamps && (
                 <div className="flex items-center">
@@ -115,12 +126,7 @@ function App() {
                 </div>
               )}
             </div>
-          )) : (
-            <div className="text-center py-4 text-gray-500">
-              <p className="text-sm">現在地を取得中...</p>
-              <p className="text-xs mt-1">位置情報を許可してください</p>
-            </div>
-          )}
+          ))}
         </div>
       </div>
 
