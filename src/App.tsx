@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Map, MapPin, Camera, Recycle as Bicycle, Coffee, Star, Award, Navigation, Store, Clock, Users } from 'lucide-react';
+import GoogleMap from './components/GoogleMap';
+import { touristSpotsData, TouristSpot } from './data/touristSpots';
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [userStamps, setUserStamps] = useState(3);
   const [userCoupons, setUserCoupons] = useState(2);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [selectedSpot, setSelectedSpot] = useState<TouristSpot | null>(null);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -86,16 +89,18 @@ function App() {
       <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">おすすめスポット</h3>
         <div className="space-y-2">
-          {touristSpots.filter(spot => spot.type !== 'convenience').slice(0, 3).map((spot, index) => (
+          {touristSpotsData.filter(spot => spot.type !== 'convenience').slice(0, 3).map((spot, index) => (
             <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
               <div>
                 <p className="font-medium text-sm">{spot.name}</p>
-                <p className="text-xs text-gray-600">{spot.distance} • {spot.difficulty}</p>
+                <p className="text-xs text-gray-600">{spot.distance}{spot.difficulty ? ` • ${spot.difficulty}` : ''}</p>
               </div>
-              <div className="flex items-center">
-                <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                <span className="text-sm">{spot.stamps}</span>
-              </div>
+              {spot.stamps && (
+                <div className="flex items-center">
+                  <Star className="w-4 h-4 text-yellow-500 mr-1" />
+                  <span className="text-sm">{spot.stamps}</span>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -122,30 +127,64 @@ function App() {
           <h2 className="text-lg font-bold text-gray-800">観光マップ</h2>
           <Navigation className="w-5 h-5 text-indigo-600" />
         </div>
-        <div className="bg-white rounded p-4 min-h-40 flex items-center justify-center border-2 border-dashed border-gray-300">
-          <div className="text-center">
-            <Map className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-            <p className="text-gray-500 text-center">
-              📍 GPS連動マップ<br/>
-              <span className="text-sm">現在地から観光スポットへのルートを表示</span>
-            </p>
+        <GoogleMap 
+          spots={touristSpotsData} 
+          onSpotClick={(spot) => setSelectedSpot(spot)}
+        />
+      </div>
+
+      {selectedSpot && (
+        <div className="japanese-card p-4 border-l-4 border-indigo-600">
+          <h3 className="font-semibold text-gray-800 mb-2">選択中のスポット</h3>
+          <div className="flex justify-between items-start">
+            <div className="flex-1">
+              <h4 className="font-medium text-gray-800">{selectedSpot.name}</h4>
+              <p className="text-sm text-gray-600 mt-1">{selectedSpot.description}</p>
+              {selectedSpot.distance && (
+                <p className="text-sm text-gray-500 mt-1">{selectedSpot.distance}</p>
+              )}
+              {selectedSpot.stamps && (
+                <div className="flex items-center mt-2">
+                  <Award className="w-4 h-4 text-red-600 mr-1" />
+                  <span className="text-sm font-medium">+{selectedSpot.stamps} スタンプ</span>
+                </div>
+              )}
+            </div>
+            <button 
+              onClick={() => setSelectedSpot(null)}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              ✕
+            </button>
           </div>
         </div>
-      </div>
+      )}
 
       <div className="space-y-3">
         <h3 className="font-semibold text-gray-800 bamboo-border pl-3">観光スポット一覧</h3>
-        {touristSpots.map((spot, index) => (
+        {touristSpotsData.map((spot, index) => (
           <div key={index} className="japanese-card p-4">
             <div className="flex justify-between items-start">
               <div className="flex-1">
                 <div className="flex items-center mb-1">
                   <h4 className="font-medium text-gray-800">{spot.name}</h4>
-                  {spot.type === 'convenience' && (
+                  {spot.type === 'convenience' ? (
                     <Store className="w-4 h-4 text-blue-600 ml-2" />
+                  ) : spot.type === 'cafe' ? (
+                    <Coffee className="w-4 h-4 text-orange-600 ml-2" />
+                  ) : spot.type === 'shrine' ? (
+                    <span className="ml-2">⛩️</span>
+                  ) : spot.type === 'nature' ? (
+                    <span className="ml-2">🌿</span>
+                  ) : spot.type === 'viewpoint' ? (
+                    <span className="ml-2">🏔️</span>
+                  ) : null
                   )}
                 </div>
-                <p className="text-sm text-gray-600 mt-1">{spot.distance}</p>
+                <p className="text-sm text-gray-600 mt-1">{spot.description}</p>
+                {spot.distance && (
+                  <p className="text-xs text-gray-500 mt-1">{spot.distance}</p>
+                )}
                 {spot.difficulty && (
                   <p className="text-xs text-gray-500">{spot.difficulty}</p>
                 )}
@@ -155,11 +194,22 @@ function App() {
                     <span className="text-sm font-medium">+{spot.stamps} スタンプ</span>
                   </div>
                 )}
-                {spot.type === 'convenience' && (
-                  <p className="text-xs text-blue-600 mt-1">コンビニエンスストア</p>
+                {spot.rating && (
+                  <div className="flex items-center mt-1">
+                    <Star className="w-4 h-4 text-yellow-500 mr-1" />
+                    <span className="text-sm">{spot.rating}</span>
+                  </div>
+                )}
+                {spot.coupon && (
+                  <span className="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mt-1">
+                    クーポンあり
+                  </span>
                 )}
               </div>
-              <button className="bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700 transition-colors">
+              <button 
+                onClick={() => setSelectedSpot(spot)}
+                className="bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700 transition-colors"
+              >
                 ナビ開始
               </button>
             </div>
