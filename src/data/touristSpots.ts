@@ -98,5 +98,16 @@ export const touristSpotsData: TouristSpot[] = [
     description: '手打ち蕎麦の名店。地元産の蕎麦粉を使用した絶品蕎麦が味わえます。',
     rating: 4.6,
     distance: '0.9km'
+  },
+  {
+    id: 'housenji-temple',
+    name: '法泉寺',
+    lat: 33.20541304916532,
+    lng: 130.37116642460438,
+    type: 'shrine',
+    stamps: 2,
+    difficulty: '中級',
+    description: '歴史ある古刹。静寂な境内で心を落ち着かせることができます。',
+    distance: '1.5km'
   }
 ];
