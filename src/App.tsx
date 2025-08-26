@@ -9,6 +9,7 @@ function App() {
   const [userCoupons, setUserCoupons] = useState(2);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [selectedSpot, setSelectedSpot] = useState<TouristSpot | null>(null);
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -16,6 +17,28 @@ function App() {
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // GPS現在地取得
+  React.useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          });
+        },
+        (error) => {
+          console.log('位置情報の取得に失敗しました:', error.message);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 300000 // 5分間キャッシュ
+        }
+      );
+    }
   }, []);
 
   const navigationItems = [
@@ -130,6 +153,7 @@ function App() {
         <OpenStreetMap 
           spots={touristSpotsData} 
           onSpotClick={(spot) => setSelectedSpot(spot)}
+          userLocation={userLocation}
         />
       </div>
 

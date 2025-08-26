@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { MapPin } from 'lucide-react';
+import { MapPin, Navigation } from 'lucide-react';
 
 // Leafletのデフォルトアイコンの問題を修正
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -28,6 +28,7 @@ interface TouristSpot {
 interface OpenStreetMapProps {
   spots: TouristSpot[];
   onSpotClick?: (spot: TouristSpot) => void;
+  userLocation?: { lat: number; lng: number } | null;
 }
 
 // カスタムマーカーアイコンを作成
@@ -76,7 +77,7 @@ const createCustomIcon = (type: string) => {
 };
 
 // 現在地取得コンポーネント
-const LocationButton: React.FC = () => {
+const LocationButton: React.FC<{ onLocationFound?: (lat: number, lng: number) => void }> = ({ onLocationFound }) => {
   const map = useMap();
 
   const handleLocationClick = () => {
@@ -85,22 +86,23 @@ const LocationButton: React.FC = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           map.setView([latitude, longitude], 16);
+          onLocationFound?.(latitude, longitude);
           
           // 現在地マーカーを追加
           const currentLocationIcon = L.divIcon({
-            html: '<div style="background: #4285f4; width: 12px; height: 12px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.3);"></div>',
+            html: '<div style="background: #4285f4; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 8px rgba(66, 133, 244, 0.6); animation: pulse 2s infinite;"></div>',
             className: 'current-location-marker',
-            iconSize: [18, 18],
-            iconAnchor: [9, 9]
+            iconSize: [22, 22],
+            iconAnchor: [11, 11]
           });
           
           L.marker([latitude, longitude], { icon: currentLocationIcon })
             .addTo(map)
-            .bindPopup('現在地')
+            .bindPopup('📍 現在地')
             .openPopup();
         },
         () => {
-          alert('現在地を取得できませんでした');
+          alert('現在地を取得できませんでした。位置情報の許可を確認してください。');
         }
       );
     } else {
@@ -113,17 +115,17 @@ const LocationButton: React.FC = () => {
       <div className="leaflet-control leaflet-bar">
         <button
           onClick={handleLocationClick}
-          className="bg-white border border-gray-300 w-8 h-8 flex items-center justify-center hover:bg-gray-50 rounded"
+          className="bg-white border border-gray-300 w-10 h-10 flex items-center justify-center hover:bg-blue-50 rounded shadow-md transition-colors"
           title="現在地を表示"
         >
-          <MapPin className="w-4 h-4 text-indigo-600" />
+          <Navigation className="w-5 h-5 text-blue-600" />
         </button>
       </div>
     </div>
   );
 };
 
-const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ spots, onSpotClick }) => {
+const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ spots, onSpotClick, userLocation }) => {
   // 藩境のまちの中心座標
   const center: [number, number] = [33.5904, 130.4017];
 
@@ -199,7 +201,33 @@ const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ spots, onSpotClick }) => 
         ))}
         
         {/* 現在地ボタン */}
-        <LocationButton />
+        <LocationButton onLocationFound={(lat, lng) => console.log('現在地:', lat, lng)} />
+        
+        {/* ユーザーの現在地マーカー */}
+        {userLocation && (
+          <Marker
+            position={[userLocation.lat, userLocation.lng]}
+            icon={L.divIcon({
+              html: '<div style="background: #4285f4; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 8px rgba(66, 133, 244, 0.6);"></div>',
+              className: 'current-location-marker',
+              iconSize: [22, 22],
+              iconAnchor: [11, 11]
+            })}
+          >
+            <Popup>
+              <div style={{ padding: '8px', fontFamily: "'Noto Serif JP', serif" }}>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
+                  <span style={{ fontSize: '16px', marginRight: '8px' }}>📍</span>
+                  <h3 style={{ margin: '0', color: '#4285f4', fontSize: '14px' }}>現在地</h3>
+                </div>
+                <p style={{ margin: '0', color: '#666', fontSize: '12px' }}>
+                  緯度: {userLocation.lat.toFixed(6)}<br/>
+                  経度: {userLocation.lng.toFixed(6)}
+                </p>
+              </div>
+            </Popup>
+          </Marker>
+        )}
       </MapContainer>
       
       {/* マップ情報 */}
