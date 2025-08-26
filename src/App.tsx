@@ -386,7 +386,7 @@ function App() {
                     <span className="ml-2 bg-red-100 text-red-800 text-xs px-2 py-1 rounded stamp-effect">
                       クーポンあり
                     </span>
-                  }
+                  )}
                 </div>
               </div>
               <Coffee className="w-5 h-5 text-orange-600" />
