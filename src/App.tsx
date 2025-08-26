@@ -195,7 +195,8 @@ function App() {
             <div className="flex justify-between items-start mb-3">
               <h4 className="font-medium text-gray-800 flex-1">{spot.name}</h4>
               <TextToSpeech 
-                text={`${spot.name}。${spot.description}`}
+                text={spot.name}
+                description={spot.description}
                 language="ja"
                 className="ml-2"
               />

@@ -179,7 +179,8 @@ const OpenStreetMap: React.FC<OpenStreetMapProps> = ({ spots, onSpotClick, userL
                 {/* 音声読み上げ機能 */}
                 <div style={{ marginBottom: '8px' }}>
                   <TextToSpeech 
-                    text={`${spot.name}。${spot.description}`}
+                    text={spot.name}
+                    description={spot.description}
                     language="ja"
                   />
                 </div>

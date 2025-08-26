@@ -3,12 +3,14 @@ import { Volume2, VolumeX, Globe } from 'lucide-react';
 
 interface TextToSpeechProps {
   text: string;
+  description?: string;
   language?: 'ja' | 'en' | 'ko' | 'zh';
   className?: string;
 }
 
 const TextToSpeech: React.FC<TextToSpeechProps> = ({ 
   text, 
+  description = '',
   language = 'ja', 
   className = '' 
 }) => {
@@ -22,7 +24,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
     { code: 'zh', name: '中文', flag: '🇨🇳' }
   ];
 
-  const translateText = (text: string, targetLang: string): string => {
+  const translateText = (text: string, desc: string, targetLang: string): string => {
     // 簡易翻訳（実際のプロジェクトではGoogle Translate APIなどを使用）
     const translations: { [key: string]: { [key: string]: string } } = {
       '旧吉原家住宅': {
@@ -30,20 +32,27 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         ko: '구 요시와라가 주택',
         zh: '旧吉原家住宅'
       },
-      '主屋および御成門（おなりもん）は文政八年(1825年)の建築で国指定重要文化財である他、大川市指定有形文化財に指定されている土蔵3棟と、国登録有形文化財の通用門および煉瓦塀があります。': {
+      '主屋および御成門（おなりもん）は文政八年(1825年)の建築で国指定重要文化財である他、大川市指定有形文化財に指定されている土蔵3棟と、国登録有形文化財の通用門および煉瓦塀があります。複雑な屋根の構成と大壁造の重厚な外観、玄関から上ノ間に至る接客部分と内向き部分の動線が明確に区分された平面構成が特徴です。また、楠の大材を使用した土間廻りの豪快なつくりと、優れた細工による座敷廻りの洒落た意匠とを兼ね備えており、江戸後期の上質な大型民家の姿を伝えるものとして高く評価されています。': {
         en: 'The main house and Onarimmon gate were built in 1825 and are designated as National Important Cultural Properties. There are also 3 storehouses designated as Okawa City Tangible Cultural Properties and a service gate and brick fence registered as National Tangible Cultural Properties.',
         ko: '주택과 오나리몬 문은 1825년에 건축되어 국가 지정 중요문화재입니다. 또한 오카와시 지정 유형문화재인 창고 3동과 국가 등록 유형문화재인 통용문 및 벽돌 담장이 있습니다.',
         zh: '主屋和御成门建于1825年，是国家指定重要文化财产。还有3栋被指定为大川市有形文化财产的仓库，以及被登录为国家有形文化财产的通用门和砖墙。'
       }
     };
 
-    // 簡易的な翻訳ロジック
+    // 名前の翻訳
+    let translatedText = text;
+    let translatedDesc = desc;
+    
     for (const [japanese, translation] of Object.entries(translations)) {
       if (text.includes(japanese)) {
-        return translation[targetLang] || text;
+        translatedText = translation[targetLang] || text;
+      }
+      if (desc.includes(japanese)) {
+        translatedDesc = translation[targetLang] || desc;
       }
     }
-    return text;
+    
+    return `${translatedText}。${translatedDesc}`;
   };
 
   const speak = (textToSpeak: string, lang: string) => {
@@ -92,7 +101,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
     if (isPlaying) {
       stopSpeech();
     } else {
-      const translatedText = translateText(text, currentLanguage);
+      const translatedText = translateText(text, description, currentLanguage);
       speak(translatedText, currentLanguage);
     }
   };
