@@ -33,7 +33,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
     const initMap = async () => {
       // Check if API key is available and valid
       const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-      if (!apiKey || apiKey === 'your_actual_google_maps_api_key_here') {
+      if (!apiKey || apiKey === 'your_actual_google_maps_api_key_here' || apiKey.trim() === '') {
         console.warn('Google Maps API key not configured properly');
         return;
       }
@@ -41,7 +41,9 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
       const loader = new Loader({
         apiKey: apiKey,
         version: 'weekly',
-        libraries: ['places']
+        libraries: ['places'],
+        language: 'ja',
+        region: 'JP'
       });
 
       try {
@@ -50,7 +52,12 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
         if (mapRef.current) {
           const mapInstance = new google.maps.Map(mapRef.current, {
             center: center,
-            zoom: 14,
+            zoom: 13,
+            mapTypeId: 'roadmap',
+            disableDefaultUI: false,
+            zoomControl: true,
+            streetViewControl: false,
+            fullscreenControl: false,
             styles: [
               // 和風テーマのマップスタイル
               {
@@ -104,6 +111,18 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
         }
       } catch (error) {
         console.error('Google Maps loading error:', error);
+        // エラーが発生した場合の処理
+        if (mapRef.current) {
+          mapRef.current.innerHTML = `
+            <div class="flex items-center justify-center h-full bg-gray-100 rounded-lg">
+              <div class="text-center p-4">
+                <div class="text-red-500 mb-2">⚠️</div>
+                <p class="text-gray-600 text-sm mb-2">Google Maps読み込みエラー</p>
+                <p class="text-xs text-gray-500">APIキーを確認してください</p>
+              </div>
+            </div>
+          `;
+        }
       }
     };
 
@@ -256,13 +275,20 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ spots, onSpotClick }) => {
       </div>
 
       {/* API Key警告 */}
-      {(!import.meta.env.VITE_GOOGLE_MAPS_API_KEY || import.meta.env.VITE_GOOGLE_MAPS_API_KEY === 'your_actual_google_maps_api_key_here') && (
+      {(!import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 
+        import.meta.env.VITE_GOOGLE_MAPS_API_KEY === 'your_actual_google_maps_api_key_here' ||
+        import.meta.env.VITE_GOOGLE_MAPS_API_KEY.trim() === '') && (
         <div className="absolute inset-0 bg-gray-100 rounded-lg flex items-center justify-center">
           <div className="text-center p-4">
             <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-            <p className="text-gray-600 text-sm mb-2">Google Maps API キーが必要です</p>
+            <p className="text-gray-600 text-sm mb-2">🗺️ Google Maps API キーが必要です</p>
             <p className="text-xs text-gray-500">
-              .env ファイルに有効な VITE_GOOGLE_MAPS_API_KEY を設定してください
+              .env ファイルに有効なAPIキーを設定してください
+            </p>
+            <p className="text-xs text-blue-600 mt-2">
+              <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank" rel="noopener noreferrer">
+                APIキー取得方法 →
+              </a>
             </p>
           </div>
         </div>
