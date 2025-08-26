@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 和風テイストのカスタムスタイル */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+
+:root {
+  /* 和風カラーパレット */
+  --japan-indigo: #2e4057;
+  --japan-red: #c73e1d;
+  --japan-gold: #daa520;
+  --japan-cream: #f5f5dc;
+  --bamboo-green: #4a5d23;
+  --sakura-pink: #ffb7c5;
+}
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: linear-gradient(135deg, #f5f5dc 0%, #fff8f0 100%);
+}
+
+/* 和風グラデーション効果 */
+.japanese-gradient {
+  background: linear-gradient(135deg, var(--japan-indigo) 0%, var(--japan-red) 100%);
+}
+
+/* 和紙テクスチャー風背景 */
+.washi-texture {
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* 印章風ボタン */
+.hanko-button {
+  border-radius: 50%;
+  border: 2px solid var(--japan-red);
+  background: radial-gradient(circle, #fff 60%, var(--japan-red) 60%);
+  box-shadow: 0 2px 8px rgba(199, 62, 29, 0.3);
+  transition: all 0.3s ease;
+}
+
+.hanko-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(199, 62, 29, 0.4);
+}
+
+/* 竹をイメージしたボーダー */
+.bamboo-border {
+  border-left: 4px solid var(--bamboo-green);
+  border-image: linear-gradient(to bottom, 
+    var(--bamboo-green) 0%, 
+    transparent 20%, 
+    var(--bamboo-green) 40%, 
+    transparent 60%, 
+    var(--bamboo-green) 80%, 
+    transparent 100%) 1;
+}
+
+/* 桜の花びらアニメーション */
+@keyframes sakura-fall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(calc(100vh + 10px)) rotate(360deg); opacity: 0; }
+}
+
+.sakura-petal {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--sakura-pink);
+  border-radius: 50% 0 50% 0;
+  animation: sakura-fall 8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 和風カード */
+.japanese-card {
+  background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+.japanese-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--japan-gold) 20%, 
+    var(--japan-gold) 80%, 
+    transparent 100%);
+}
+
+/* スタンプ風エフェクト */
+.stamp-effect {
+  position: relative;
+  transform: rotate(-5deg);
+}
+
+.stamp-effect::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px dashed var(--japan-red);
+  border-radius: 8px;
+  opacity: 0.7;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 640px) {
+  .japanese-card {
+    margin: 0.5rem;
+  }
+}
+
+/* スクロールバーのカスタマイズ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--japan-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--japan-indigo);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--japan-red);
+}
