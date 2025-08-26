@@ -178,8 +178,7 @@ function App() {
                     <span className="ml-2">🌿</span>
                   ) : spot.type === 'viewpoint' ? (
                     <span className="ml-2">🏔️</span>
-                  ) : null
-                  )}
+                  ) : null}
                 </div>
                 <p className="text-sm text-gray-600 mt-1">{spot.description}</p>
                 {spot.distance && (
