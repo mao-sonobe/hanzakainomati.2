@@ -32,10 +32,20 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         ko: '구 요시와라가 주택',
         zh: '旧吉原家住宅'
       },
+      '庄分酢・高橋家住宅': {
+        en: 'Shobunsu Takahashi Family Residence',
+        ko: '쇼분스 다카하시가 주택',
+        zh: '庄分醋・高桥家住宅'
+      },
       '主屋および御成門（おなりもん）は文政八年(1825年)の建築で国指定重要文化財である他、大川市指定有形文化財に指定されている土蔵3棟と、国登録有形文化財の通用門および煉瓦塀があります。複雑な屋根の構成と大壁造の重厚な外観、玄関から上ノ間に至る接客部分と内向き部分の動線が明確に区分された平面構成が特徴です。また、楠の大材を使用した土間廻りの豪快なつくりと、優れた細工による座敷廻りの洒落た意匠とを兼ね備えており、江戸後期の上質な大型民家の姿を伝えるものとして高く評価されています。': {
         en: 'The main house and Onarimmon gate were built in 1825 and are designated as National Important Cultural Properties. There are also 3 storehouses designated as Okawa City Tangible Cultural Properties and a service gate and brick fence registered as National Tangible Cultural Properties.',
         ko: '주택과 오나리몬 문은 1825년에 건축되어 국가 지정 중요문화재입니다. 또한 오카와시 지정 유형문화재인 창고 3동과 국가 등록 유형문화재인 통용문 및 벽돌 담장이 있습니다.',
         zh: '主屋和御成门建于1825年，是国家指定重要文化财产。还有3栋被指定为大川市有形文化财产的仓库，以及被登录为国家有形文化财产的通用门和砖墙。'
+      },
+      '江戸時代初期、高橋家の初代清右衛門が榎津に移り住んだことをきっかけに、二代目四郎兵衛が造り酒屋を開始。その後、四代目清右衛門が酢造商いを始めたのが「庄分酢」の始まり。': {
+        en: 'In the early Edo period, the first generation Seiemon of the Takahashi family moved to Enozu, and the second generation Shirobei started a sake brewery. Later, the fourth generation Seiemon began vinegar brewing, which was the beginning of "Shobunsu".',
+        ko: '에도시대 초기, 다카하시가의 초대 세이에몬이 에노즈로 이주한 것을 계기로 2대 시로베이가 양조장을 시작했습니다. 그 후 4대 세이에몬이 식초 양조업을 시작한 것이 "쇼분스"의 시작입니다.',
+        zh: '江户时代初期，高桥家初代清右卫门迁居榎津，二代目四郎兵卫开始经营酿酒屋。后来四代目清右卫门开始醋酿造生意，这就是"庄分醋"的开始。'
       }
     };
 
