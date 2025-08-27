@@ -89,8 +89,8 @@ export const touristSpotsData: TouristSpot[] = [
   {
     id: 'kobo-hachiman-shrine',
     name: '小保八幡神社',
-    lat: 33.20468724474168,
-    lng: 130.37173131322425,
+    lat: 33.20538486526676,
+    lng: 130.3711697404847,
     type: 'shrine',
     stamps: 2,
     difficulty: '神社・寺院',
