@@ -6,6 +6,7 @@ import GoogleMapsButton from './components/GoogleMapsButton';
 import RoutePlanner from './components/RoutePlanner';
 import { touristSpotsData, TouristSpot } from './data/touristSpots';
 import { RoutePlan } from './utils/routePlanning';
+import { calculateDistance, isWithinRadius, formatDistance } from './utils/distance';
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -61,7 +62,27 @@ function App() {
 
   // スタンプ獲得機能
   const collectStamp = (spot: TouristSpot) => {
-    if (!spot.stamps || visitedSpots.has(spot.id)) return;
+    if (!spot.stamps || visitedSpots.has(spot.id)) {
+      if (visitedSpots.has(spot.id)) {
+        alert('このスポットのスタンプは既に獲得済みです。');
+      }
+      return;
+    }
+    
+    // 現在地が取得できない場合
+    if (!userLocation) {
+      alert('現在地を取得できません。位置情報を許可してください。');
+      return;
+    }
+    
+    // 50メートル以内にいるかチェック
+    const distance = calculateDistance(userLocation, { lat: spot.lat, lng: spot.lng });
+    const isNearby = isWithinRadius(userLocation, { lat: spot.lat, lng: spot.lng }, 50);
+    
+    if (!isNearby) {
+      alert(`スタンプを獲得するには${spot.name}から50m以内に近づく必要があります。\n現在の距離: ${formatDistance(distance)}`);
+      return;
+    }
     
     const newVisitedSpots = new Set(visitedSpots);
     newVisitedSpots.add(spot.id);
@@ -79,7 +100,7 @@ function App() {
     setUserStamps(prev => prev + spot.stamps);
     
     // 成功メッセージ表示
-    alert(`🎉 ${spot.name}で${spot.stamps}個のスタンプを獲得しました！`);
+    alert(`🎉 ${spot.name}でスタンプを獲得しました！\n総獲得数: ${userStamps + spot.stamps}個`);
   };
 
   // スポットが訪問済みかチェック
@@ -267,7 +288,7 @@ function App() {
                   <div className="flex items-center justify-between mt-2">
                     <div className="flex items-center">
                       <Award className="w-4 h-4 text-red-600 mr-1" />
-                      <span className="text-sm font-medium">+{spot.stamps} スタンプ</span>
+                      <span className="text-sm font-medium">+1 スタンプ</span>
                     </div>
                     {isSpotVisited(spot.id) ? (
                       <div className="flex items-center text-green-600">
@@ -276,10 +297,25 @@ function App() {
                       </div>
                     ) : (
                       <button
-                        onClick={() => collectStamp(spot)}
-                        className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 transition-colors"
+                        onClick={() => {
+                          if (!userLocation) {
+                            alert('現在地を取得できません。位置情報を許可してください。');
+                            return;
+                          }
+                          const distance = calculateDistance(userLocation, { lat: spot.lat, lng: spot.lng });
+                          const isNearby = isWithinRadius(userLocation, { lat: spot.lat, lng: spot.lng }, 50);
+                          collectStamp(spot);
+                        }}
+                        className={`px-3 py-1 rounded text-sm transition-colors ${
+                          userLocation && isWithinRadius(userLocation, { lat: spot.lat, lng: spot.lng }, 50)
+                            ? 'bg-red-600 text-white hover:bg-red-700'
+                            : 'bg-gray-400 text-white cursor-not-allowed'
+                        }`}
                       >
-                        スタンプ獲得
+                        {userLocation && isWithinRadius(userLocation, { lat: spot.lat, lng: spot.lng }, 50) 
+                          ? 'スタンプ獲得' 
+                          : `${formatDistance(calculateDistance(userLocation || { lat: 0, lng: 0 }, { lat: spot.lat, lng: spot.lng }))}`
+                        }
                       </button>
                     )}
                   </div>
@@ -388,9 +424,9 @@ function App() {
         
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
-            進捗: {Object.keys(collectedStamps).length}/12 
+            進捗: {Object.keys(collectedStamps).length}/{touristSpotsData.filter(spot => spot.stamps).length}
             <span className="ml-2 text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-              {Math.round((Object.keys(collectedStamps).length / 12) * 100)}% 完了
+              {Math.round((Object.keys(collectedStamps).length / touristSpotsData.filter(spot => spot.stamps).length) * 100)}% 完了
             </span>
           </p>
         </div>
@@ -416,7 +452,7 @@ function App() {
                   </div>
                   <div className="flex items-center">
                     <Award className="w-4 h-4 text-red-600 mr-1" />
-                    <span className="text-sm font-bold text-red-600">+{data.stamps}</span>
+                    <span className="text-sm font-bold text-red-600">+1</span>
                   </div>
                 </div>
               );
@@ -452,11 +488,11 @@ function App() {
           <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
             <span className="text-sm">コンプリート特典</span>
             <span className={`text-xs px-2 py-1 rounded ${
-              Object.keys(collectedStamps).length >= 12 
+              Object.keys(collectedStamps).length >= touristSpotsData.filter(spot => spot.stamps).length
                 ? 'bg-green-100 text-green-800' 
                 : 'bg-gray-100 text-gray-800'
             }`}>
-              {Object.keys(collectedStamps).length >= 12 ? '獲得済み' : `${Object.keys(collectedStamps).length}/12`}
+              {Object.keys(collectedStamps).length >= touristSpotsData.filter(spot => spot.stamps).length ? '獲得済み' : `${Object.keys(collectedStamps).length}/${touristSpotsData.filter(spot => spot.stamps).length}`}
             </span>
           </div>
         </div>
