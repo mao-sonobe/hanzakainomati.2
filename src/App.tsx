@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Map, MapPin, Camera, Recycle as Bicycle, Coffee, Star, Award, Navigation, Store, Clock, Users } from 'lucide-react';
+import { Map, MapPin, Camera, Recycle as Bicycle, Coffee, Star, Award, Navigation, Store, Clock, Users, CheckCircle } from 'lucide-react';
 import OpenStreetMap from './components/OpenStreetMap';
 import TextToSpeech from './components/TextToSpeech';
 import GoogleMapsButton from './components/GoogleMapsButton';
@@ -9,8 +9,10 @@ import { RoutePlan } from './utils/routePlanning';
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
-  const [userStamps, setUserStamps] = useState(3);
+  const [userStamps, setUserStamps] = useState(0);
   const [userCoupons, setUserCoupons] = useState(2);
+  const [visitedSpots, setVisitedSpots] = useState<Set<string>>(new Set());
+  const [collectedStamps, setCollectedStamps] = useState<{ [key: string]: { timestamp: Date; stamps: number } }>({});
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [selectedSpot, setSelectedSpot] = useState<TouristSpot | null>(null);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -56,6 +58,32 @@ function App() {
       });
     }
   }, []);
+
+  // スタンプ獲得機能
+  const collectStamp = (spot: TouristSpot) => {
+    if (!spot.stamps || visitedSpots.has(spot.id)) return;
+    
+    const newVisitedSpots = new Set(visitedSpots);
+    newVisitedSpots.add(spot.id);
+    setVisitedSpots(newVisitedSpots);
+    
+    const newCollectedStamps = {
+      ...collectedStamps,
+      [spot.id]: {
+        timestamp: new Date(),
+        stamps: spot.stamps
+      }
+    };
+    setCollectedStamps(newCollectedStamps);
+    
+    setUserStamps(prev => prev + spot.stamps);
+    
+    // 成功メッセージ表示
+    alert(`🎉 ${spot.name}で${spot.stamps}個のスタンプを獲得しました！`);
+  };
+
+  // スポットが訪問済みかチェック
+  const isSpotVisited = (spotId: string) => visitedSpots.has(spotId);
 
   const navigationItems = [
     { id: 'home', icon: Map, label: 'ホーム' },
@@ -236,9 +264,39 @@ function App() {
                   <p className="text-xs text-gray-500">{spot.difficulty}</p>
                 )}
                 {spot.stamps && (
-                  <div className="flex items-center mt-2">
-                    <Award className="w-4 h-4 text-red-600 mr-1" />
-                    <span className="text-sm font-medium">+{spot.stamps} スタンプ</span>
+                  <div className="flex items-center justify-between mt-2">
+                    <div className="flex items-center">
+                      <Award className="w-4 h-4 text-red-600 mr-1" />
+                      <span className="text-sm font-medium">+{selectedSpot.stamps} スタンプ</span>
+                    </div>
+                    {isSpotVisited(selectedSpot.id) ? (
+                      <div className="flex items-center text-green-600">
+                        <CheckCircle className="w-4 h-4 mr-1" />
+                        <span className="text-sm">獲得済み</span>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => collectStamp(selectedSpot)}
+                        className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 transition-colors"
+                      >
+                        スタンプ獲得
+                    <div className="flex items-center">
+                      <Award className="w-4 h-4 text-red-600 mr-1" />
+                      <span className="text-sm font-medium">+{spot.stamps} スタンプ</span>
+                    </div>
+                    {isSpotVisited(spot.id) ? (
+                      <div className="flex items-center text-green-600">
+                        <CheckCircle className="w-4 h-4 mr-1" />
+                        <span className="text-sm">獲得済み</span>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => collectStamp(spot)}
+                        className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 transition-colors"
+                      >
+                        スタンプ獲得
+                      </button>
+                    )}
                   </div>
                 )}
                 {spot.coupon && (
@@ -326,12 +384,12 @@ function App() {
             <div 
               key={i} 
               className={`aspect-square rounded-lg border-2 border-dashed flex items-center justify-center ${
-                i < userStamps 
+                i < Object.keys(collectedStamps).length
                   ? 'bg-red-100 border-red-300 stamp-effect' 
                   : 'bg-gray-50 border-gray-300'
               }`}
             >
-              {i < userStamps ? (
+              {i < Object.keys(collectedStamps).length ? (
                 <div className="text-center">
                   <Award className="w-6 h-6 text-red-600 mx-auto mb-1" />
                   <p className="text-xs font-medium">#{i + 1}</p>
@@ -345,28 +403,76 @@ function App() {
         
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
-            進捗: {userStamps}/12 
+            進捗: {Object.keys(collectedStamps).length}/12 
             <span className="ml-2 text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
-              {Math.round((userStamps / 12) * 100)}% 完了
+              {Math.round((Object.keys(collectedStamps).length / 12) * 100)}% 完了
             </span>
           </p>
         </div>
       </div>
 
       <div className="japanese-card p-4">
+        <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">獲得履歴</h3>
+        <div className="space-y-2 max-h-48 overflow-y-auto">
+          {Object.entries(collectedStamps)
+            .sort(([,a], [,b]) => b.timestamp.getTime() - a.timestamp.getTime())
+            .map(([spotId, data]) => {
+              const spot = touristSpotsData.find(s => s.id === spotId);
+              return (
+                <div key={spotId} className="flex items-center justify-between p-2 bg-green-50 rounded">
+                  <div className="flex items-center">
+                    <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
+                    <div>
+                      <p className="text-sm font-medium">{spot?.name}</p>
+                      <p className="text-xs text-gray-600">
+                        {data.timestamp.toLocaleDateString('ja-JP')} {data.timestamp.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <Award className="w-4 h-4 text-red-600 mr-1" />
+                    <span className="text-sm font-bold text-red-600">+{data.stamps}</span>
+                  </div>
+                </div>
+              );
+            })}
+          {Object.keys(collectedStamps).length === 0 && (
+            <p className="text-center text-gray-500 py-4">まだスタンプを獲得していません</p>
+          )}
+        </div>
+      </div>
+      <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">特典・報酬</h3>
         <div className="space-y-2">
           <div className="flex justify-between items-center p-2 bg-green-50 rounded">
             <span className="text-sm">5個達成特典</span>
-            <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">獲得済み</span>
+            <span className={`text-xs px-2 py-1 rounded ${
+              Object.keys(collectedStamps).length >= 5 
+                ? 'bg-green-100 text-green-800' 
+                : 'bg-gray-100 text-gray-800'
+            }`}>
+              {Object.keys(collectedStamps).length >= 5 ? '獲得済み' : `${Object.keys(collectedStamps).length}/5`}
+            </span>
           </div>
           <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
             <span className="text-sm">10個達成特典</span>
-            <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">7/10</span>
+            <span className={`text-xs px-2 py-1 rounded ${
+              Object.keys(collectedStamps).length >= 10 
+                ? 'bg-green-100 text-green-800' 
+                : 'bg-gray-100 text-gray-800'
+            }`}>
+              {Object.keys(collectedStamps).length >= 10 ? '獲得済み' : `${Object.keys(collectedStamps).length}/10`}
+            </span>
           </div>
           <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
             <span className="text-sm">コンプリート特典</span>
-            <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">3/12</span>
+            <span className={`text-xs px-2 py-1 rounded ${
+              Object.keys(collectedStamps).length >= 12 
+                ? 'bg-green-100 text-green-800' 
+                : 'bg-gray-100 text-gray-800'
+            }`}>
+              {Object.keys(collectedStamps).length >= 12 ? '獲得済み' : `${Object.keys(collectedStamps).length}/12`}
+            </span>
           </div>
         </div>
       </div>
@@ -555,8 +661,8 @@ function App() {
           <div className="flex items-center p-2 bg-red-50 rounded">
             <Award className="w-4 h-4 text-red-600 mr-3" />
             <div className="flex-1">
-              <p className="text-sm font-medium">藩境神社でスタンプ獲得</p>
-              <p className="text-xs text-gray-600">2024/01/15 14:30</p>
+              <p className="text-sm font-medium">スタンプを獲得しました</p>
+              <p className="text-xs text-gray-600">観光スポットを訪問してスタンプを集めよう</p>
             </div>
           </div>
           <div className="flex items-center p-2 bg-orange-50 rounded">
