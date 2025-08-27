@@ -762,12 +762,60 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-red-50 to-indigo-50">
       <div className={`${isMobile ? 'max-w-md' : 'max-w-6xl'} mx-auto bg-white shadow-lg min-h-screen`}>
         {/* Header */}
-        <div className={`japanese-gradient text-white ${isMobile ? 'p-4' : 'p-6'} sticky top-0 z-10`}>
-          <div className="flex items-center justify-between">
-            <h1 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold`}>Tourism Mobility App</h1>
-            <div className="flex items-center space-x-2">
-              <Clock className="w-4 h-4" />
-              <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>藩境のまち</span>
+        <div className={`relative overflow-hidden ${isMobile ? 'p-4' : 'p-6'} sticky top-0 z-10`} style={{
+          background: 'linear-gradient(135deg, #2e4057 0%, #c73e1d 50%, #daa520 100%)',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.15)'
+        }}>
+          {/* 和紙テクスチャー背景 */}
+          <div className="absolute inset-0 opacity-10" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)`,
+            backgroundSize: '20px 20px'
+          }}></div>
+          
+          {/* 装飾的な円形パターン */}
+          <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full border-2 border-white opacity-10"></div>
+          <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full border border-white opacity-10"></div>
+          
+          <div className="relative flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              {/* 印章風アイコン */}
+              <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white border-opacity-30">
+                <span className="text-white font-bold text-lg">藩</span>
+              </div>
+              <div>
+                <h1 className={`${isMobile ? 'text-xl' : 'text-3xl'} font-bold text-white tracking-wider`} style={{
+                  fontFamily: "'Noto Serif JP', serif",
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                }}>
+                  藩境のまち
+                </h1>
+                <p className={`${isMobile ? 'text-xs' : 'text-sm'} text-white opacity-90 tracking-wide`} style={{
+                  fontFamily: "'Noto Serif JP', serif"
+                }}>
+                  歴史と文化の散策路
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-3">
+              {/* スタンプ数表示 */}
+              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg px-3 py-2 border border-white border-opacity-30">
+                <div className="flex items-center space-x-2">
+                  <Award className="w-4 h-4 text-yellow-300" />
+                  <span className={`${isMobile ? 'text-sm' : 'text-base'} text-white font-bold`}>
+                    {userStamps}
+                  </span>
+                </div>
+                <p className="text-xs text-white opacity-80">スタンプ</p>
+              </div>
+              
+              {/* 時刻表示 */}
+              <div className="hidden sm:flex items-center space-x-2 bg-white bg-opacity-10 rounded-lg px-3 py-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-white text-sm opacity-90">
+                  {new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              </div>
             </div>
           </div>
         </div>
