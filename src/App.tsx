@@ -401,7 +401,7 @@ function App() {
         <p className="text-sm text-gray-600 mb-3">獲得したスタンプのコレクション</p>
         
         <div className="grid grid-cols-3 gap-3">
-          {Array.from({ length: 12 }, (_, i) => (
+          {Array.from({ length: 17 }, (_, i) => (
             <div 
               key={i} 
               className={`aspect-square rounded-lg border-2 border-dashed flex items-center justify-center ${
