@@ -790,20 +790,6 @@ function App() {
               <p className="text-xs text-gray-600">観光スポットを訪問してスタンプを集めよう</p>
             </div>
           </div>
-          <div className="flex items-center p-2 bg-orange-50 rounded">
-            <Coffee className="w-4 h-4 text-orange-600 mr-3" />
-            <div className="flex-1">
-              <p className="text-sm font-medium">和風カフェ 梅で口コミ投稿</p>
-              <p className="text-xs text-gray-600">2024/01/14 16:45</p>
-            </div>
-          </div>
-          <div className="flex items-center p-2 bg-green-50 rounded">
-            <Bicycle className="w-4 h-4 text-green-600 mr-3" />
-            <div className="flex-1">
-              <p className="text-sm font-medium">自転車で竹林コース走行</p>
-              <p className="text-xs text-gray-600">2024/01/13 10:20</p>
-            </div>
-          </div>
         </div>
       </div>
 
