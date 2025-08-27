@@ -62,6 +62,11 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         ko: '고보 하치만 신사',
         zh: '小保八幡神社'
       },
+      '法泉寺': {
+        en: 'Hosen Temple',
+        ko: '호센지',
+        zh: '法泉寺'
+      },
       '主屋および御成門（おなりもん）は文政八年(1825年)の建築で国指定重要文化財である他、大川市指定有形文化財に指定されている土蔵3棟と、国登録有形文化財の通用門および煉瓦塀があります。複雑な屋根の構成と大壁造の重厚な外観、玄関から上ノ間に至る接客部分と内向き部分の動線が明確に区分された平面構成が特徴です。また、楠の大材を使用した土間廻りの豪快なつくりと、優れた細工による座敷廻りの洒落た意匠とを兼ね備えており、江戸後期の上質な大型民家の姿を伝えるものとして高く評価されています。': {
         en: 'The main house and Onarimmon gate were built in 1825 and are designated as National Important Cultural Properties. There are also 3 storehouses designated as Okawa City Tangible Cultural Properties and a service gate and brick fence registered as National Tangible Cultural Properties.',
         ko: '주택과 오나리몬 문은 1825년에 건축되어 국가 지정 중요문화재입니다. 또한 오카와시 지정 유형문화재인 창고 3동과 국가 등록 유형문화재인 통용문 및 벽돌 담장이 있습니다.',
