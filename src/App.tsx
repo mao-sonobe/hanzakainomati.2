@@ -189,10 +189,10 @@ function App() {
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">本日の特別体験</h3>
         <div className="bg-gradient-to-r from-red-50 to-yellow-50 p-3 rounded-lg border border-red-200">
           <div className="flex items-center mb-2">
-            <Camera className="w-4 h-4 text-red-600 mr-2" />
-            <span className="font-medium text-sm">AR神社体験</span>
+            <Coffee className="w-4 h-4 text-red-600 mr-2" />
+            <span className="font-medium text-sm">茶道体験</span>
           </div>
-          <p className="text-xs text-gray-600 mb-2">藩境神社でAR技術による歴史解説を体験できます</p>
+          <p className="text-xs text-gray-600 mb-2">伝統的な茶道の作法を学び、和の心を体験できます</p>
           <button className="hanko-button w-8 h-8 text-xs font-bold text-red-600">体験</button>
         </div>
       </div>
