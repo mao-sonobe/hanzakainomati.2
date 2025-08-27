@@ -67,10 +67,20 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         ko: '호센지',
         zh: '法泉寺'
       },
+      '光楽寺': {
+        en: 'Koraku Temple',
+        ko: '고라쿠지',
+        zh: '光乐寺'
+      },
       '安土桃山時代初期の天正年間（1573年〜1592年）に創建され、江戸時代の寛文5年（1665年）に柳川藩主の援助のもと現在の場所に移転。浄土宗の寺院で、境内には文政7年（1824年）に建築された山門の鐘楼門や宝形造りの本堂と庫裏（くり）が残されています。外からは、重層の楼鐘門である山門を観ることができます。ガイド付ツアーでは、内部に入り、本堂の壮麗な青い龍の装飾や大川組子を施した扉などを鑑賞できます（日程による）。': {
         en: 'Founded during the Tensho period (1573-1592) in the early Azuchi-Momoyama period, it was relocated to its current location in 1665 during the Edo period with the support of the Yanagawa domain lord. This Jodo sect temple features a bell tower gate built in 1824, and a treasure-shaped main hall and kitchen. Guided tours allow visitors to see the magnificent blue dragon decorations and Okawa kumiko doors inside.',
         ko: '아즈치모모야마시대 초기 덴쇼년간(1573년~1592년)에 창건되어, 에도시대 간분 5년(1665년)에 야나가와 번주의 지원으로 현재 위치로 이전했습니다. 정토종 사원으로, 1824년에 건축된 종루문과 보형조 본당, 고리가 남아있습니다. 가이드 투어에서는 본당의 장려한 푸른 용 장식과 오카와 구미코 문을 감상할 수 있습니다.',
         zh: '创建于安土桃山时代初期的天正年间（1573年～1592年），江户时代宽文5年（1665年）在柳川藩主的援助下迁至现在的位置。这是净土宗寺院，境内有文政7年（1824年）建造的钟楼门和宝形造的本堂、库里。导游团可以进入内部，欣赏本堂壮丽的青龙装饰和大川组子门。'
+      },
+      '寛永元年（1624年）に旧柳河藩主の立花宗茂（たちばなむねしげ）によって創建、弘化4年（1847年）に再建されたと伝えられています。大屋根が二重に見える造りになっていることが特徴的です。本堂の天井には、様々な動物、植物、人物が描かれている板絵が168枚あります。19世紀に活躍した絵師、北島（幽谷）勝永の印があるものも多く、のびやかな線と構図や色彩に圧倒されます。ガイド付ツアーでは入ることができますので問合せを（日程による）。': {
+        en: 'Founded in 1624 by former Yanagawa domain lord Tachibana Muneshige, it was rebuilt in 1847. The temple features a distinctive double-layered roof structure. The main hall ceiling contains 168 painted panels depicting various animals, plants, and people. Many bear the seal of 19th-century artist Kitajima (Yukoku) Katsunaga, known for graceful lines, composition, and vibrant colors. Interior visits available through guided tours (by appointment).',
+        ko: '간에이 원년(1624년)에 구 야나가와 번주 다치바나 무네시게에 의해 창건되어, 고카 4년(1847년)에 재건되었다고 전해집니다. 대지붕이 이중으로 보이는 구조가 특징적입니다. 본당 천장에는 다양한 동물, 식물, 인물이 그려진 판화 168매가 있습니다. 19세기에 활약한 화가 기타지마(유코쿠) 가츠나가의 인장이 있는 것도 많아, 유연한 선과 구도, 색채에 압도됩니다.',
+        zh: '宽永元年（1624年）由旧柳河藩主立花宗茂创建，弘化4年（1847年）重建。特色是大屋顶呈双重结构。本堂天花板上有168幅描绘各种动物、植物、人物的板画。许多作品都有19世纪画家北岛（幽谷）胜永的印章，其流畅的线条、构图和色彩令人震撼。可通过导游团进入参观（需预约）。'
       },
       '主屋および御成門（おなりもん）は文政八年(1825年)の建築で国指定重要文化財である他、大川市指定有形文化財に指定されている土蔵3棟と、国登録有形文化財の通用門および煉瓦塀があります。複雑な屋根の構成と大壁造の重厚な外観、玄関から上ノ間に至る接客部分と内向き部分の動線が明確に区分された平面構成が特徴です。また、楠の大材を使用した土間廻りの豪快なつくりと、優れた細工による座敷廻りの洒落た意匠とを兼ね備えており、江戸後期の上質な大型民家の姿を伝えるものとして高く評価されています。': {
         en: 'The main house and Onarimmon gate were built in 1825 and are designated as National Important Cultural Properties. There are also 3 storehouses designated as Okawa City Tangible Cultural Properties and a service gate and brick fence registered as National Tangible Cultural Properties.',
