@@ -609,10 +609,28 @@ function App() {
       <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">利用履歴</h3>
         <div className="space-y-2">
+          <div className="flex justify-between items-center p-2 bg-green-50 rounded">
+            <div>
+              <p className="text-sm font-medium">藩境のまち広場 → 旧吉原家住宅</p>
+              <p className="text-xs text-gray-600">1.2km走行 • 8分 • 今日 14:30</p>
+              <div className="flex items-center mt-1">
+                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded mr-2">電動アシスト</span>
+                <span className="text-xs text-green-600">CO2削減: 0.3kg</span>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-sm font-medium text-green-600">¥150</p>
+              <Bicycle className="w-4 h-4 text-green-600 ml-auto" />
+            </div>
+          </div>
           <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
             <div>
-              <p className="text-sm font-medium">神社→竹林コース</p>
-              <p className="text-xs text-gray-600">5.2km走行 • 45分 • 2024/01/15</p>
+              <p className="text-sm font-medium">小保八幡神社 → 光楽寺 → 法泉寺</p>
+              <p className="text-xs text-gray-600">2.8km走行 • 22分 • 昨日 10:15</p>
+              <div className="flex items-center mt-1">
+                <span className="text-xs bg-gray-100 text-gray-800 px-2 py-0.5 rounded mr-2">シティサイクル</span>
+                <span className="text-xs text-green-600">CO2削減: 0.7kg</span>
+              </div>
             </div>
             <div className="text-right">
               <p className="text-sm font-medium text-green-600">¥200</p>
@@ -621,11 +639,43 @@ function App() {
           </div>
           <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
             <div>
-              <p className="text-sm font-medium">展望台往復コース</p>
-              <p className="text-xs text-gray-600">8.7km走行 • 1時間20分 • 2024/01/10</p>
+              <p className="text-sm font-medium">庄分酢・高橋家住宅 → 森田うるし店</p>
+              <p className="text-xs text-gray-600">0.8km走行 • 5分 • 1/20 16:45</p>
+              <div className="flex items-center mt-1">
+                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded mr-2">電動アシスト</span>
+                <span className="text-xs text-green-600">CO2削減: 0.2kg</span>
+              </div>
             </div>
             <div className="text-right">
-              <p className="text-sm font-medium text-green-600">¥350</p>
+              <p className="text-sm font-medium text-green-600">¥100</p>
+              <Bicycle className="w-4 h-4 text-green-600 ml-auto" />
+            </div>
+          </div>
+          <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+            <div>
+              <p className="text-sm font-medium">願蓮寺 → 中村家住宅 → 木下家蔵</p>
+              <p className="text-xs text-gray-600">1.5km走行 • 12分 • 1/18 13:20</p>
+              <div className="flex items-center mt-1">
+                <span className="text-xs bg-gray-100 text-gray-800 px-2 py-0.5 rounded mr-2">シティサイクル</span>
+                <span className="text-xs text-green-600">CO2削減: 0.4kg</span>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-sm font-medium text-green-600">¥150</p>
+              <Bicycle className="w-4 h-4 text-green-600 ml-auto" />
+            </div>
+          </div>
+          <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+            <div>
+              <p className="text-sm font-medium">旧緒方家住宅 → 御堺江湖 → 藩境の石列</p>
+              <p className="text-xs text-gray-600">1.8km走行 • 15分 • 1/15 11:30</p>
+              <div className="flex items-center mt-1">
+                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded mr-2">電動アシスト</span>
+                <span className="text-xs text-green-600">CO2削減: 0.5kg</span>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-sm font-medium text-green-600">¥180</p>
               <Bicycle className="w-4 h-4 text-green-600 ml-auto" />
             </div>
           </div>
@@ -634,9 +684,22 @@ function App() {
         <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">今月の利用実績</span>
-            <span className="text-lg font-bold text-green-600">13.9km</span>
+            <span className="text-lg font-bold text-green-600">8.1km</span>
           </div>
-          <p className="text-xs text-gray-600 mt-1">CO2削減量: 約3.2kg</p>
+          <div className="grid grid-cols-3 gap-2 mt-2 text-center">
+            <div>
+              <p className="text-sm font-bold text-green-600">5回</p>
+              <p className="text-xs text-gray-600">利用回数</p>
+            </div>
+            <div>
+              <p className="text-sm font-bold text-green-600">¥780</p>
+              <p className="text-xs text-gray-600">利用料金</p>
+            </div>
+            <div>
+              <p className="text-sm font-bold text-green-600">2.1kg</p>
+              <p className="text-xs text-gray-600">CO2削減</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
