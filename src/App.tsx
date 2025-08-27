@@ -18,6 +18,8 @@ function App() {
   const [selectedSpot, setSelectedSpot] = useState<TouristSpot | null>(null);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [selectedRoute, setSelectedRoute] = useState<RoutePlan | null>(null);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -26,6 +28,26 @@ function App() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // スクロール時のヘッダー表示/非表示制御
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        // 上にスクロールまたは最上部付近の場合は表示
+        setIsHeaderVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // 下にスクロールかつ100px以上スクロールした場合は非表示
+        setIsHeaderVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   // GPS現在地取得
   React.useEffect(() => {
@@ -789,7 +811,9 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-red-50 to-indigo-50">
       <div className={`${isMobile ? 'max-w-md' : 'max-w-6xl'} mx-auto bg-white shadow-lg min-h-screen`}>
         {/* Header */}
-        <div className={`relative overflow-hidden ${isMobile ? 'p-4' : 'p-6'} sticky top-0 z-[9999]`} style={{
+        <div className={`relative overflow-hidden ${isMobile ? 'p-4' : 'p-6'} fixed top-0 left-1/2 transform -translate-x-1/2 w-full ${isMobile ? 'max-w-md' : 'max-w-6xl'} z-[9999] transition-transform duration-300 ${
+          isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+        }`} style={{
           background: 'linear-gradient(135deg, #2e4057 0%, #c73e1d 50%, #daa520 100%)',
           boxShadow: '0 4px 20px rgba(0,0,0,0.15)'
         }}>
@@ -848,14 +872,16 @@ function App() {
         </div>
 
         {/* Content */}
-        <div className={`${isMobile ? 'p-4 pb-20' : 'p-8 pb-8'}`}>
+        <div className={`${isMobile ? 'p-4 pb-20 pt-24' : 'p-8 pb-8 pt-32'}`}>
           {isMobile ? (
             renderContent()
           ) : (
             <div className="grid grid-cols-12 gap-8">
               {/* Desktop Sidebar Navigation */}
               <div className="col-span-3">
-                <div className="japanese-card p-6 sticky top-24">
+                <div className={`japanese-card p-6 sticky transition-all duration-300 ${
+                  isHeaderVisible ? 'top-32' : 'top-8'
+                }`}>
                   <h2 className="text-xl font-bold text-gray-800 mb-6 bamboo-border pl-3">メニュー</h2>
                   <nav className="space-y-2">
                     {navigationItems.map((item) => {
