@@ -880,7 +880,7 @@ function App() {
               {/* Desktop Sidebar Navigation */}
               <div className="col-span-3">
                 <div className={`japanese-card p-6 sticky transition-all duration-300 ${
-                  isHeaderVisible ? 'top-24' : 'top-4'
+                  isHeaderVisible ? 'top-20' : 'top-4'
                 }`}>
                   <h2 className="text-xl font-bold text-gray-800 mb-6 bamboo-border pl-3">メニュー</h2>
                   <nav className="space-y-2">
