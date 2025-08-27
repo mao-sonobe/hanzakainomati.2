@@ -92,6 +92,16 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         ko: '기노시타가 창고',
         zh: '木下家仓库'
       },
+      '森田うるし店': {
+        en: 'Morita Urushi Shop',
+        ko: '모리타 옻칠가게',
+        zh: '森田漆器店'
+      },
+      '文政11年（1829）創業からまもなく漆店を始めた老舗。家具の町大川では、仏壇、箪笥などの家具の塗料として漆は欠かせない存在でした。今の家は明治38年（1905）に建て替えられたもので、入口天井に大つり戸があります。軒先の表札や店内の看板からその歴史を感じることができます。現在の七代目は漆職人として製品の製造販売、金継ぎ、修復、オーダーメイドなどを手掛けています。幾何学模様などの柄が描かれたオリジナルの漆器は、非常に丈夫で現在の生活スタイルに合うデザインで、ひとつひとつ丁寧な物作りを心がけています。店では漆、金箔、柿渋等販売しています。': {
+        en: 'A long-established lacquer shop founded in 1829. In Okawa, known as a furniture town, lacquer was essential for coating Buddhist altars, chests, and other furniture. The current building was rebuilt in 1905 and features a large sliding door on the entrance ceiling. The 7th generation owner continues as a lacquer craftsman, handling manufacturing, kintsugi repairs, restoration, and custom orders. Original lacquerware with geometric patterns is very durable and designed for modern lifestyles.',
+        ko: '1829년 창업한 오래된 옻칠 가게입니다. 가구의 도시 오카와에서는 불단, 장롱 등 가구의 도료로 옻칠이 필수적이었습니다. 현재 건물은 1905년에 재건축되었으며, 입구 천장에 큰 미닫이문이 있습니다. 현재 7대째는 옻칠 장인으로서 제품 제조판매, 금계기, 수복, 주문제작 등을 담당하고 있습니다. 기하학적 무늬가 그려진 오리지널 칠기는 매우 튼튼하고 현재 생활 스타일에 맞는 디자인입니다.',
+        zh: '文政11年（1829年）创业后不久开始经营漆器店的老字号。在家具之町大川，漆作为佛坛、箪笥等家具的涂料是不可缺少的存在。现在的房屋是明治38年（1905年）重建的，入口天花板有大吊门。现在的第七代传人作为漆器工匠，从事产品制造销售、金缮、修复、定制等工作。绘有几何图案的原创漆器非常坚固，设计符合现代生活方式。'
+      },
       '安土桃山時代初期の天正年間（1573年〜1592年）に創建され、江戸時代の寛文5年（1665年）に柳川藩主の援助のもと現在の場所に移転。浄土宗の寺院で、境内には文政7年（1824年）に建築された山門の鐘楼門や宝形造りの本堂と庫裏（くり）が残されています。外からは、重層の楼鐘門である山門を観ることができます。ガイド付ツアーでは、内部に入り、本堂の壮麗な青い龍の装飾や大川組子を施した扉などを鑑賞できます（日程による）。': {
         en: 'Founded during the Tensho period (1573-1592) in the early Azuchi-Momoyama period, it was relocated to its current location in 1665 during the Edo period with the support of the Yanagawa domain lord. This Jodo sect temple features a bell tower gate built in 1824, and a treasure-shaped main hall and kitchen. Guided tours allow visitors to see the magnificent blue dragon decorations and Okawa kumiko doors inside.',
         ko: '아즈치모모야마시대 초기 덴쇼년간(1573년~1592년)에 창건되어, 에도시대 간분 5년(1665년)에 야나가와 번주의 지원으로 현재 위치로 이전했습니다. 정토종 사원으로, 1824년에 건축된 종루문과 보형조 본당, 고리가 남아있습니다. 가이드 투어에서는 본당의 장려한 푸른 용 장식과 오카와 구미코 문을 감상할 수 있습니다.',
