@@ -11,7 +11,7 @@ import { calculateDistance, isWithinRadius, formatDistance } from './utils/dista
 function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [userStamps, setUserStamps] = useState(0);
-  const [userCoupons, setUserCoupons] = useState(2);
+  const [userCoupons, setUserCoupons] = useState(1);
   const [visitedSpots, setVisitedSpots] = useState<Set<string>>(new Set());
   const [collectedStamps, setCollectedStamps] = useState<{ [key: string]: { timestamp: Date; stamps: number } }>({});
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
