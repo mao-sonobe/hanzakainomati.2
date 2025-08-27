@@ -508,33 +508,79 @@ function App() {
         <p className="text-sm text-gray-600 mb-3">エコな移動で藩境のまちを巡ろう</p>
       </div>
 
+      {/* 自転車ルートマップ */}
+      <div className="japanese-card p-4">
+        <div className="flex justify-between items-center mb-3">
+          <h3 className="font-semibold text-gray-800">自転車ルートマップ</h3>
+          <Bicycle className="w-5 h-5 text-green-600" />
+        </div>
+        <OpenStreetMap 
+          spots={touristSpotsData.filter(spot => spot.type !== 'convenience')} 
+          onSpotClick={(spot) => setSelectedSpot(spot)}
+          userLocation={userLocation}
+        />
+        <div className="mt-2 text-xs text-gray-500">
+          🚲 自転車でのおすすめルートを表示
+        </div>
+      </div>
+
       <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">利用可能ステーション</h3>
         <div className="space-y-3">
-          {bicycleStations.length > 0 ? bicycleStations.map((station, index) => (
-            <div key={index} className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-              <div className="flex-1">
-                <div className="flex items-center mb-1">
-                  <p className="font-medium">{station.name}</p>
-                  <Bicycle className="w-4 h-4 text-green-600 ml-2" />
-                </div>
-                <p className="text-sm text-gray-600">
-                  {station.type === 'electric' ? '電動アシスト' : 'シティサイクル'} • {station.distance}
-                </p>
-                <p className="text-xs text-gray-500">
-                  利用可能: {station.available}/{station.total}台
-                </p>
+          {/* 仮想的な自転車ステーション */}
+          <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+            <div className="flex-1">
+              <div className="flex items-center mb-1">
+                <p className="font-medium">藩境のまち広場ステーション</p>
+                <Bicycle className="w-4 h-4 text-green-600 ml-2" />
               </div>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-                予約
-              </button>
+              <p className="text-sm text-gray-600">
+                電動アシスト • 徒歩2分
+              </p>
+              <p className="text-xs text-gray-500">
+                利用可能: 5/8台
+              </p>
             </div>
-          )) : (
-            <div className="japanese-card p-4 text-center">
-              <p className="text-gray-500">現在地周辺の自転車ステーションを検索中...</p>
-              <p className="text-sm text-gray-400 mt-1">位置情報を許可してください</p>
+            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+              予約
+            </button>
+          </div>
+          
+          <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+            <div className="flex-1">
+              <div className="flex items-center mb-1">
+                <p className="font-medium">小保八幡神社前ステーション</p>
+                <Bicycle className="w-4 h-4 text-green-600 ml-2" />
+              </div>
+              <p className="text-sm text-gray-600">
+                シティサイクル • 徒歩5分
+              </p>
+              <p className="text-xs text-gray-500">
+                利用可能: 3/6台
+              </p>
             </div>
-          )}
+            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+              予約
+            </button>
+          </div>
+          
+          <div className="flex justify-between items-center p-3 bg-gray-100 rounded-lg">
+            <div className="flex-1">
+              <div className="flex items-center mb-1">
+                <p className="font-medium">榎津駅前ステーション</p>
+                <Bicycle className="w-4 h-4 text-gray-400 ml-2" />
+              </div>
+              <p className="text-sm text-gray-600">
+                電動アシスト • 徒歩8分
+              </p>
+              <p className="text-xs text-gray-500">
+                利用可能: 0/10台（満車）
+              </p>
+            </div>
+            <button className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed" disabled>
+              満車
+            </button>
+          </div>
         </div>
       </div>
 
