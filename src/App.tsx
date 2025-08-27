@@ -498,25 +498,6 @@ function App() {
         </div>
       </div>
 
-      <div className="japanese-card p-4">
-        <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">AR/VR体験履歴</h3>
-        <div className="space-y-2">
-          <div className="flex items-center p-2 bg-blue-50 rounded">
-            <Camera className="w-4 h-4 text-blue-600 mr-2" />
-            <div className="flex-1">
-              <p className="text-sm font-medium">神社AR体験</p>
-              <p className="text-xs text-gray-600">2024/01/15 完了</p>
-            </div>
-          </div>
-          <div className="flex items-center p-2 bg-purple-50 rounded">
-            <Camera className="w-4 h-4 text-purple-600 mr-2" />
-            <div className="flex-1">
-              <p className="text-sm font-medium">竹林VR散策</p>
-              <p className="text-xs text-gray-600">2024/01/10 完了</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 
@@ -715,8 +696,8 @@ function App() {
             <p className="text-xs text-gray-600">口コミ投稿数</p>
           </div>
           <div className="text-center p-3 bg-purple-50 rounded">
-            <p className="text-lg font-bold text-purple-600">3</p>
-            <p className="text-xs text-gray-600">AR/VR体験</p>
+            <p className="text-lg font-bold text-purple-600">2</p>
+            <p className="text-xs text-gray-600">茶道体験</p>
           </div>
           <div className="text-center p-3 bg-yellow-50 rounded">
             <p className="text-lg font-bold text-yellow-600">15</p>
