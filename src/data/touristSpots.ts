@@ -86,4 +86,16 @@ export const touristSpotsData: TouristSpot[] = [
     rating: 4.2,
     coupon: false
   }
+  },
+  {
+    id: 'kobo-hachiman-shrine',
+    name: '小保八幡神社',
+    lat: 33.20468724474168,
+    lng: 130.37173131322425,
+    type: 'shrine',
+    stamps: 2,
+    difficulty: '神社・寺院',
+    description: '正面に石鳥居が建てられ、石橋をわたって楼門を潜ると、正面に拝殿、本殿、左手に宮地嶽神社、右手に水天宮、神殿右脇に天満宮、左脇に祇園社が配置されており、いずれも伝統的様式を留めています。本殿は出組・腰組を用いた装飾性豊かな造りで、享和元年（1801年）の年号を記した棟札も見つかっています。',
+    rating: 4.3,
+    coupon: false
 ];
