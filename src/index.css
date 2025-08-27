@@ -208,11 +208,24 @@ body {
 
 /* Leaflet コントロールのz-index調整 */
 .leaflet-control-container {
-  z-index: 20 !important;
+  z-index: 100 !important;
 }
 
 .leaflet-popup {
-  z-index: 30 !important;
+  z-index: 200 !important;
+}
+
+/* Leaflet 地図本体のz-index制限 */
+.leaflet-container {
+  z-index: 1 !important;
+}
+
+.leaflet-map-pane {
+  z-index: 1 !important;
+}
+
+.leaflet-tile-pane {
+  z-index: 1 !important;
 }
 
 /* 現在地マーカーのパルスアニメーション */

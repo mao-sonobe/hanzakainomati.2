@@ -789,7 +789,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-red-50 to-indigo-50">
       <div className={`${isMobile ? 'max-w-md' : 'max-w-6xl'} mx-auto bg-white shadow-lg min-h-screen`}>
         {/* Header */}
-        <div className={`relative overflow-hidden ${isMobile ? 'p-4' : 'p-6'} sticky top-0 z-50`} style={{
+        <div className={`relative overflow-hidden ${isMobile ? 'p-4' : 'p-6'} sticky top-0 z-[9999]`} style={{
           background: 'linear-gradient(135deg, #2e4057 0%, #c73e1d 50%, #daa520 100%)',
           boxShadow: '0 4px 20px rgba(0,0,0,0.15)'
         }}>
