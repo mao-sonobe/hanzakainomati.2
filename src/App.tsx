@@ -872,7 +872,7 @@ function App() {
         </div>
 
         {/* Content */}
-        <div className={`${isMobile ? 'p-4 pb-20 pt-24' : 'p-8 pb-8 pt-32'}`}>
+        <div className={`${isMobile ? 'p-4 pb-20 pt-20' : 'p-8 pb-8 pt-24'}`}>
           {isMobile ? (
             renderContent()
           ) : (
@@ -880,7 +880,7 @@ function App() {
               {/* Desktop Sidebar Navigation */}
               <div className="col-span-3">
                 <div className={`japanese-card p-6 sticky transition-all duration-300 ${
-                  isHeaderVisible ? 'top-32' : 'top-8'
+                  isHeaderVisible ? 'top-24' : 'top-4'
                 }`}>
                   <h2 className="text-xl font-bold text-gray-800 mb-6 bamboo-border pl-3">メニュー</h2>
                   <nav className="space-y-2">
