@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Clock, MapPin, Award, Navigation, Bicycle, Users, Filter } from 'lucide-react';
+import { Route, Clock, MapPin, Award, Navigation, Recycle as Bicycle, Users, Filter } from 'lucide-react';
 import { TouristSpot } from '../data/touristSpots';
 import { 
   generateRoutePlans, 
