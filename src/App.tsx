@@ -267,21 +267,6 @@ function App() {
                   <div className="flex items-center justify-between mt-2">
                     <div className="flex items-center">
                       <Award className="w-4 h-4 text-red-600 mr-1" />
-                      <span className="text-sm font-medium">+{selectedSpot.stamps} スタンプ</span>
-                    </div>
-                    {isSpotVisited(selectedSpot.id) ? (
-                      <div className="flex items-center text-green-600">
-                        <CheckCircle className="w-4 h-4 mr-1" />
-                        <span className="text-sm">獲得済み</span>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={() => collectStamp(selectedSpot)}
-                        className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 transition-colors"
-                      >
-                        スタンプ獲得
-                    <div className="flex items-center">
-                      <Award className="w-4 h-4 text-red-600 mr-1" />
                       <span className="text-sm font-medium">+{spot.stamps} スタンプ</span>
                     </div>
                     {isSpotVisited(spot.id) ? (
