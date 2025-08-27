@@ -112,6 +112,16 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         ko: '지금도 현역 가구・건구 공장으로 사용되고 있는 "규슈 다테구 목공소 창고"는 쇼와 31년(1956년) 건축의 목조 2층 건물입니다. 오카와 목공업의 발상・발전지인 고보・에노즈의 역사적 거리에 서 있으며, 전후 목공업의 번영을 말해주는 것으로 2023년에 국가 등록 유형문화재가 되었습니다. 모던한 외벽과 건물에 주목하세요!',
         zh: '至今仍作为现役家具・建具工厂使用的"九州建具木工所仓库"是昭和31年（1956年）建造的木造2层建筑。坐落在大川木工业发祥发展地小保・榎津的历史街区中，因述说着战后木工业繁荣而于2023年成为国家登录有形文化财产。请注意现代化的外墙和建筑！'
       },
+      '宮崎建具': {
+        en: 'Miyazaki Tategu',
+        ko: '미야자키 다테구',
+        zh: '宫崎建具'
+      },
+      '1927年創業の老舗の建具店。この店3代目の宮崎宏樹さんは、木を自在に操り、使いやすいデザインをモットーに、伝統的な建具だけでなく、カフェや豪華観光列車の内装まで手掛けています。常に新しいものづくりにチャレンジしながら、職人の技術を今に伝えています。ガイド付ツアーに参加すると、見学できる場合もあります。工房に入ると、清々しい木の香りに包まれ、宮崎さんの匠の技に触れることができます。': {
+        en: 'A long-established joinery shop founded in 1927. The third-generation owner, Hiroki Miyazaki, masterfully manipulates wood with a motto of user-friendly design, creating not only traditional joinery but also interiors for cafes and luxury tourist trains. He continues to pass on craftsman techniques while constantly challenging new manufacturing methods. Guided tours may include workshop visits where you can experience the refreshing scent of wood and witness Miyazaki\'s masterful skills.',
+        ko: '1927년 창업한 오래된 건구점입니다. 3대째인 미야자키 히로키씨는 나무를 자유자재로 다루며, 사용하기 쉬운 디자인을 모토로 전통적인 건구뿐만 아니라 카페나 호화 관광열차의 내장까지 담당하고 있습니다. 항상 새로운 제조에 도전하면서 장인의 기술을 현재에 전하고 있습니다. 가이드 투어에 참가하면 견학할 수 있는 경우도 있습니다. 공방에 들어가면 상쾌한 나무 향기에 둘러싸여 미야자키씨의 장인 기술을 접할 수 있습니다.',
+        zh: '1927年创业的老字号建具店。第三代传人宫崎宏树先生能够自如地操控木材，以易用设计为理念，不仅制作传统建具，还承接咖啡厅和豪华观光列车的内装工程。在不断挑战新的制造工艺的同时，将工匠技术传承至今。参加导游团有时可以参观工坊。进入工坊后，会被清新的木香包围，可以感受宫崎先生的精湛技艺。'
+      },
       '安土桃山時代初期の天正年間（1573年〜1592年）に創建され、江戸時代の寛文5年（1665年）に柳川藩主の援助のもと現在の場所に移転。浄土宗の寺院で、境内には文政7年（1824年）に建築された山門の鐘楼門や宝形造りの本堂と庫裏（くり）が残されています。外からは、重層の楼鐘門である山門を観ることができます。ガイド付ツアーでは、内部に入り、本堂の壮麗な青い龍の装飾や大川組子を施した扉などを鑑賞できます（日程による）。': {
         en: 'Founded during the Tensho period (1573-1592) in the early Azuchi-Momoyama period, it was relocated to its current location in 1665 during the Edo period with the support of the Yanagawa domain lord. This Jodo sect temple features a bell tower gate built in 1824, and a treasure-shaped main hall and kitchen. Guided tours allow visitors to see the magnificent blue dragon decorations and Okawa kumiko doors inside.',
         ko: '아즈치모모야마시대 초기 덴쇼년간(1573년~1592년)에 창건되어, 에도시대 간분 5년(1665년)에 야나가와 번주의 지원으로 현재 위치로 이전했습니다. 정토종 사원으로, 1824년에 건축된 종루문과 보형조 본당, 고리가 남아있습니다. 가이드 투어에서는 본당의 장려한 푸른 용 장식과 오카와 구미코 문을 감상할 수 있습니다.',
