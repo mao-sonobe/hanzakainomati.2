@@ -3,7 +3,9 @@ import { Map, MapPin, Camera, Recycle as Bicycle, Coffee, Star, Award, Navigatio
 import OpenStreetMap from './components/OpenStreetMap';
 import TextToSpeech from './components/TextToSpeech';
 import GoogleMapsButton from './components/GoogleMapsButton';
+import RoutePlanner from './components/RoutePlanner';
 import { touristSpotsData, TouristSpot } from './data/touristSpots';
+import { RoutePlan } from './utils/routePlanning';
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -12,6 +14,7 @@ function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [selectedSpot, setSelectedSpot] = useState<TouristSpot | null>(null);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [selectedRoute, setSelectedRoute] = useState<RoutePlan | null>(null);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -57,6 +60,7 @@ function App() {
   const navigationItems = [
     { id: 'home', icon: Map, label: 'ホーム' },
     { id: 'map', icon: MapPin, label: 'マップ' },
+    { id: 'route', icon: Navigation, label: 'ルート' },
     { id: 'stamps', icon: Award, label: 'スタンプ帳' },
     { id: 'bicycle', icon: Bicycle, label: '自転車' },
     { id: 'dining', icon: Coffee, label: '飲食' },
@@ -258,6 +262,56 @@ function App() {
           </div>
         ))}
       </div>
+    </div>
+  );
+
+  const renderRouteContent = () => (
+    <div className="space-y-4">
+      <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 border-2 border-green-200 washi-texture">
+        <h2 className="text-lg font-bold text-gray-800 mb-2">ルートプランナー</h2>
+        <p className="text-sm text-gray-600">現在地から最適な観光ルートを提案します</p>
+      </div>
+
+      <RoutePlanner 
+        spots={touristSpotsData}
+        userLocation={userLocation}
+        onRouteSelect={(route) => setSelectedRoute(route)}
+      />
+
+      {selectedRoute && (
+        <div className="japanese-card p-4 border-l-4 border-green-600">
+          <h3 className="font-semibold text-gray-800 mb-2">選択中のルート</h3>
+          <div className="bg-green-50 p-3 rounded-lg">
+            <h4 className="font-medium text-green-800 mb-2">{selectedRoute.description}</h4>
+            <div className="grid grid-cols-3 gap-4 text-center mb-3">
+              <div>
+                <p className="text-lg font-bold text-green-600">{selectedRoute.spots.length}</p>
+                <p className="text-xs text-gray-600">スポット</p>
+              </div>
+              <div>
+                <p className="text-lg font-bold text-green-600">{Math.round(selectedRoute.totalDistance * 10) / 10}km</p>
+                <p className="text-xs text-gray-600">総距離</p>
+              </div>
+              <div>
+                <p className="text-lg font-bold text-green-600">{Math.round(selectedRoute.estimatedTime)}分</p>
+                <p className="text-xs text-gray-600">所要時間</p>
+              </div>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <Award className="w-4 h-4 text-red-600 mr-1" />
+                <span className="text-sm font-medium text-red-600">+{selectedRoute.totalStamps} スタンプ獲得</span>
+              </div>
+              <button 
+                onClick={() => setActiveTab('map')}
+                className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition-colors"
+              >
+                マップで確認
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 
@@ -568,6 +622,7 @@ function App() {
     switch (activeTab) {
       case 'home': return renderHomeContent();
       case 'map': return renderMapContent();
+      case 'route': return renderRouteContent();
       case 'stamps': return renderStampsContent();
       case 'bicycle': return renderBicycleContent();
       case 'dining': return renderDiningContent();
