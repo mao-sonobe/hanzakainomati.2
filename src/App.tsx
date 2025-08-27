@@ -747,21 +747,13 @@ function App() {
       <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">獲得クーポン</h3>
         <div className="space-y-2">
-          <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-200">
+          <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg border border-yellow-200">
             <div>
-              <p className="text-sm font-medium">和風カフェ 梅</p>
-              <p className="text-xs text-gray-600">抹茶セット 20%OFF</p>
-              <p className="text-xs text-gray-500">有効期限: 2024/02/15</p>
+              <p className="text-sm font-medium">庄分酢・高橋家住宅</p>
+              <p className="text-xs text-gray-600">庄分酢商品 15%OFF</p>
+              <p className="text-xs text-gray-500">有効期限: 2024/03/31</p>
             </div>
-            <button className="hanko-button w-12 h-12 text-xs font-bold text-red-600">使用</button>
-          </div>
-          <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg border border-blue-200">
-            <div>
-              <p className="text-sm font-medium">茶房 風雅</p>
-              <p className="text-xs text-gray-600">和スイーツ 15%OFF</p>
-              <p className="text-xs text-gray-500">有効期限: 2024/02/20</p>
-            </div>
-            <button className="hanko-button w-12 h-12 text-xs font-bold text-blue-600">使用</button>
+            <button className="hanko-button w-12 h-12 text-xs font-bold text-yellow-600">使用</button>
           </div>
         </div>
       </div>
