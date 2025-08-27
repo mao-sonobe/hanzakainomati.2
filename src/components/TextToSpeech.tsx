@@ -77,6 +77,11 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         ko: '간렌지',
         zh: '愿莲寺'
       },
+      '浄福寺': {
+        en: 'Jofuku Temple',
+        ko: '조후쿠지',
+        zh: '净福寺'
+      },
       '安土桃山時代初期の天正年間（1573年〜1592年）に創建され、江戸時代の寛文5年（1665年）に柳川藩主の援助のもと現在の場所に移転。浄土宗の寺院で、境内には文政7年（1824年）に建築された山門の鐘楼門や宝形造りの本堂と庫裏（くり）が残されています。外からは、重層の楼鐘門である山門を観ることができます。ガイド付ツアーでは、内部に入り、本堂の壮麗な青い龍の装飾や大川組子を施した扉などを鑑賞できます（日程による）。': {
         en: 'Founded during the Tensho period (1573-1592) in the early Azuchi-Momoyama period, it was relocated to its current location in 1665 during the Edo period with the support of the Yanagawa domain lord. This Jodo sect temple features a bell tower gate built in 1824, and a treasure-shaped main hall and kitchen. Guided tours allow visitors to see the magnificent blue dragon decorations and Okawa kumiko doors inside.',
         ko: '아즈치모모야마시대 초기 덴쇼년간(1573년~1592년)에 창건되어, 에도시대 간분 5년(1665년)에 야나가와 번주의 지원으로 현재 위치로 이전했습니다. 정토종 사원으로, 1824년에 건축된 종루문과 보형조 본당, 고리가 남아있습니다. 가이드 투어에서는 본당의 장려한 푸른 용 장식과 오카와 구미코 문을 감상할 수 있습니다.',
