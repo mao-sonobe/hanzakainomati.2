@@ -97,10 +97,20 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         ko: '모리타 옻칠가게',
         zh: '森田漆器店'
       },
+      '九州建具木工所倉庫': {
+        en: 'Kyushu Tategu Woodworking Factory Warehouse',
+        ko: '규슈 다테구 목공소 창고',
+        zh: '九州建具木工所仓库'
+      },
       '文政11年（1829）創業からまもなく漆店を始めた老舗。家具の町大川では、仏壇、箪笥などの家具の塗料として漆は欠かせない存在でした。今の家は明治38年（1905）に建て替えられたもので、入口天井に大つり戸があります。軒先の表札や店内の看板からその歴史を感じることができます。現在の七代目は漆職人として製品の製造販売、金継ぎ、修復、オーダーメイドなどを手掛けています。幾何学模様などの柄が描かれたオリジナルの漆器は、非常に丈夫で現在の生活スタイルに合うデザインで、ひとつひとつ丁寧な物作りを心がけています。店では漆、金箔、柿渋等販売しています。': {
         en: 'A long-established lacquer shop founded in 1829. In Okawa, known as a furniture town, lacquer was essential for coating Buddhist altars, chests, and other furniture. The current building was rebuilt in 1905 and features a large sliding door on the entrance ceiling. The 7th generation owner continues as a lacquer craftsman, handling manufacturing, kintsugi repairs, restoration, and custom orders. Original lacquerware with geometric patterns is very durable and designed for modern lifestyles.',
         ko: '1829년 창업한 오래된 옻칠 가게입니다. 가구의 도시 오카와에서는 불단, 장롱 등 가구의 도료로 옻칠이 필수적이었습니다. 현재 건물은 1905년에 재건축되었으며, 입구 천장에 큰 미닫이문이 있습니다. 현재 7대째는 옻칠 장인으로서 제품 제조판매, 금계기, 수복, 주문제작 등을 담당하고 있습니다. 기하학적 무늬가 그려진 오리지널 칠기는 매우 튼튼하고 현재 생활 스타일에 맞는 디자인입니다.',
         zh: '文政11年（1829年）创业后不久开始经营漆器店的老字号。在家具之町大川，漆作为佛坛、箪笥等家具的涂料是不可缺少的存在。现在的房屋是明治38年（1905年）重建的，入口天花板有大吊门。现在的第七代传人作为漆器工匠，从事产品制造销售、金缮、修复、定制等工作。绘有几何图案的原创漆器非常坚固，设计符合现代生活方式。'
+      },
+      '今も現役の家具・建具の工場として使われている「九州建具木工所倉庫」は、昭和31年（1956年）建築の木造2階建て。大川木工業の発祥発展の地である小保・榎津の歴史的な町並みに建ち、戦後の木工業の繁栄を物語ることから、2023年に国登録有形文化財となっています。モダンな外壁や建物に注目を！': {
+        en: 'The Kyushu Tategu Woodworking Factory Warehouse, still operating as an active furniture and joinery factory, is a two-story wooden building constructed in 1956. Located in the historic townscape of Kobo and Enozu, the birthplace and development center of Okawa woodworking industry, it became a National Registered Tangible Cultural Property in 2023 as it tells the story of post-war woodworking prosperity. Pay attention to the modern exterior walls and building!',
+        ko: '지금도 현역 가구・건구 공장으로 사용되고 있는 "규슈 다테구 목공소 창고"는 쇼와 31년(1956년) 건축의 목조 2층 건물입니다. 오카와 목공업의 발상・발전지인 고보・에노즈의 역사적 거리에 서 있으며, 전후 목공업의 번영을 말해주는 것으로 2023년에 국가 등록 유형문화재가 되었습니다. 모던한 외벽과 건물에 주목하세요!',
+        zh: '至今仍作为现役家具・建具工厂使用的"九州建具木工所仓库"是昭和31年（1956年）建造的木造2层建筑。坐落在大川木工业发祥发展地小保・榎津的历史街区中，因述说着战后木工业繁荣而于2023年成为国家登录有形文化财产。请注意现代化的外墙和建筑！'
       },
       '安土桃山時代初期の天正年間（1573年〜1592年）に創建され、江戸時代の寛文5年（1665年）に柳川藩主の援助のもと現在の場所に移転。浄土宗の寺院で、境内には文政7年（1824年）に建築された山門の鐘楼門や宝形造りの本堂と庫裏（くり）が残されています。外からは、重層の楼鐘門である山門を観ることができます。ガイド付ツアーでは、内部に入り、本堂の壮麗な青い龍の装飾や大川組子を施した扉などを鑑賞できます（日程による）。': {
         en: 'Founded during the Tensho period (1573-1592) in the early Azuchi-Momoyama period, it was relocated to its current location in 1665 during the Edo period with the support of the Yanagawa domain lord. This Jodo sect temple features a bell tower gate built in 1824, and a treasure-shaped main hall and kitchen. Guided tours allow visitors to see the magnificent blue dragon decorations and Okawa kumiko doors inside.',

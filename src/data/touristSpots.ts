@@ -182,4 +182,16 @@ export const touristSpotsData: TouristSpot[] = [
     rating: 4.4,
     coupon: false
   }
+  {
+    id: 'kyushu-tategu-warehouse',
+    name: '九州建具木工所倉庫',
+    lat: 33.206349300855194,
+    lng: 130.3707087280602,
+    type: 'viewpoint',
+    stamps: 2,
+    difficulty: '国登録有形文化財',
+    description: '今も現役の家具・建具の工場として使われている「九州建具木工所倉庫」は、昭和31年（1956年）建築の木造2階建て。大川木工業の発祥発展の地である小保・榎津の歴史的な町並みに建ち、戦後の木工業の繁栄を物語ることから、2023年に国登録有形文化財となっています。モダンな外壁や建物に注目を！',
+    rating: 4.2,
+    coupon: false
+  }
 ];
