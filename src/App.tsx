@@ -154,10 +154,10 @@ function App() {
     <div className="space-y-6">
       <div className="relative h-48 bg-gradient-to-r from-indigo-900 via-indigo-800 to-red-900 rounded-lg overflow-hidden washi-texture">
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-        <div className="relative p-6 text-white">
+        <div className="relative p-4 text-white">
           <h1 className="text-2xl font-bold mb-2">藩境のまち</h1>
           <p className="text-sm opacity-90">伝統と自然が織りなす観光体験</p>
-          <div className="absolute bottom-4 right-4 bg-white bg-opacity-20 backdrop-blur rounded-lg p-2">
+          <div className="absolute bottom-2 right-2 bg-white bg-opacity-20 backdrop-blur rounded-lg p-2">
             <p className="text-xs">獲得スタンプ: {userStamps}/12</p>
           </div>
         </div>
@@ -167,7 +167,7 @@ function App() {
         <div className="sakura-petal" style={{left: '80%', animationDelay: '4s'}}></div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-2">
         <div className="japanese-card p-4">
           <div className="flex items-center mb-2">
             <Award className="w-5 h-5 text-red-600 mr-2" />
@@ -187,7 +187,7 @@ function App() {
         </div>
       </div>
 
-      <div className="japanese-card p-4">
+      <div className="japanese-card p-3">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">おすすめスポット</h3>
         <div className="space-y-2">
           {touristSpotsData.filter(spot => spot.type !== 'convenience').slice(0, 3).map((spot, index) => (
@@ -207,7 +207,7 @@ function App() {
         </div>
       </div>
 
-      <div className="japanese-card p-4">
+      <div className="japanese-card p-3">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">本日の特別体験</h3>
         <div className="bg-gradient-to-r from-red-50 to-yellow-50 p-3 rounded-lg border border-red-200">
           <div className="flex items-center mb-2">
@@ -263,9 +263,9 @@ function App() {
       )}
 
       <div className="space-y-3">
-        <h3 className="font-semibold text-gray-800 bamboo-border pl-3">観光スポット一覧</h3>
+        <h3 className="font-semibold text-gray-800 bamboo-border pl-3 mb-2">観光スポット一覧</h3>
         {touristSpotsData.map((spot, index) => (
-          <div key={index} className="japanese-card p-4">
+          <div key={index} className="japanese-card p-3">
             {/* 音声読み上げ機能 */}
             <div className="flex justify-between items-start mb-3">
               <h4 className="font-medium text-gray-800 flex-1">{spot.name}</h4>
@@ -877,10 +877,11 @@ function App() {
             renderContent()
           ) : (
             <div className="grid grid-cols-12 gap-8">
+            <div className="grid grid-cols-12 gap-4">
               {/* Desktop Sidebar Navigation */}
               <div className="col-span-3">
                 <div className={`japanese-card p-6 sticky transition-all duration-300 ${
-                  isHeaderVisible ? 'top-24' : 'top-4'
+                  isHeaderVisible ? 'top-6' : 'top-2'
                 }`}>
                   <h2 className="text-xl font-bold text-gray-800 mb-6 bamboo-border pl-3">メニュー</h2>
                   <nav className="space-y-2">
