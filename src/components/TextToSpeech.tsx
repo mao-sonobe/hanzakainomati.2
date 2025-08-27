@@ -117,10 +117,20 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         ko: '미야자키 다테구',
         zh: '宫崎建具'
       },
+      '藩境のまち広場': {
+        en: 'Hankyou Town Plaza',
+        ko: '한쿄 마을 광장',
+        zh: '藩境之町广场'
+      },
       '1927年創業の老舗の建具店。この店3代目の宮崎宏樹さんは、木を自在に操り、使いやすいデザインをモットーに、伝統的な建具だけでなく、カフェや豪華観光列車の内装まで手掛けています。常に新しいものづくりにチャレンジしながら、職人の技術を今に伝えています。ガイド付ツアーに参加すると、見学できる場合もあります。工房に入ると、清々しい木の香りに包まれ、宮崎さんの匠の技に触れることができます。': {
         en: 'A long-established joinery shop founded in 1927. The third-generation owner, Hiroki Miyazaki, masterfully manipulates wood with a motto of user-friendly design, creating not only traditional joinery but also interiors for cafes and luxury tourist trains. He continues to pass on craftsman techniques while constantly challenging new manufacturing methods. Guided tours may include workshop visits where you can experience the refreshing scent of wood and witness Miyazaki\'s masterful skills.',
         ko: '1927년 창업한 오래된 건구점입니다. 3대째인 미야자키 히로키씨는 나무를 자유자재로 다루며, 사용하기 쉬운 디자인을 모토로 전통적인 건구뿐만 아니라 카페나 호화 관광열차의 내장까지 담당하고 있습니다. 항상 새로운 제조에 도전하면서 장인의 기술을 현재에 전하고 있습니다. 가이드 투어에 참가하면 견학할 수 있는 경우도 있습니다. 공방에 들어가면 상쾌한 나무 향기에 둘러싸여 미야자키씨의 장인 기술을 접할 수 있습니다.',
         zh: '1927年创业的老字号建具店。第三代传人宫崎宏树先生能够自如地操控木材，以易用设计为理念，不仅制作传统建具，还承接咖啡厅和豪华观光列车的内装工程。在不断挑战新的制造工艺的同时，将工匠技术传承至今。参加导游团有时可以参观工坊。进入工坊后，会被清新的木香包围，可以感受宫崎先生的精湛技艺。'
+      },
+      '藩境のまちの散策はここから。外にはまち全体のマップもあるので、チェックして歩いてみましょう。駐車場、トイレ、休憩所がある藩境のまち広場は、ここにこられた方が快適に過ごせるよう９時〜17時に開放されています。休憩所の中には、このまちの歴史などを紹介する掲示や、散策マップもありますよ。': {
+        en: 'Start your exploration of Hankyou Town from here. There is a map of the entire town outside, so check it out before you walk. Hankyou Town Plaza, which has parking, restrooms, and a rest area, is open from 9 AM to 5 PM for visitors to spend time comfortably. Inside the rest area, there are displays introducing the history of this town and walking maps.',
+        ko: '한쿄 마을 산책은 여기서부터 시작합니다. 밖에는 마을 전체 지도도 있으니 확인하고 걸어보세요. 주차장, 화장실, 휴게소가 있는 한쿄 마을 광장은 방문하신 분들이 편안하게 지낼 수 있도록 오전 9시부터 오후 5시까지 개방되어 있습니다. 휴게소 안에는 이 마을의 역사를 소개하는 게시물과 산책 지도도 있어요.',
+        zh: '藩境之町的散步从这里开始。外面有整个町的地图，请查看后再步行。有停车场、厕所、休息所的藩境之町广场，为了让来访者能够舒适地度过时光，从上午9点到下午5点开放。休息所内有介绍这个町历史的展示和散步地图。'
       },
       '安土桃山時代初期の天正年間（1573年〜1592年）に創建され、江戸時代の寛文5年（1665年）に柳川藩主の援助のもと現在の場所に移転。浄土宗の寺院で、境内には文政7年（1824年）に建築された山門の鐘楼門や宝形造りの本堂と庫裏（くり）が残されています。外からは、重層の楼鐘門である山門を観ることができます。ガイド付ツアーでは、内部に入り、本堂の壮麗な青い龍の装飾や大川組子を施した扉などを鑑賞できます（日程による）。': {
         en: 'Founded during the Tensho period (1573-1592) in the early Azuchi-Momoyama period, it was relocated to its current location in 1665 during the Edo period with the support of the Yanagawa domain lord. This Jodo sect temple features a bell tower gate built in 1824, and a treasure-shaped main hall and kitchen. Guided tours allow visitors to see the magnificent blue dragon decorations and Okawa kumiko doors inside.',

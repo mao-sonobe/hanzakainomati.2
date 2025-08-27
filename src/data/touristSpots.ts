@@ -27,6 +27,18 @@ export const touristSpotsData: TouristSpot[] = [
     coupon: false
   },
   {
+    id: 'hankyou-plaza',
+    name: '藩境のまち広場',
+    lat: 33.204409514126155,
+    lng: 130.37314260488293,
+    type: 'convenience',
+    stamps: 1,
+    difficulty: '散策拠点',
+    description: '藩境のまちの散策はここから。外にはまち全体のマップもあるので、チェックして歩いてみましょう。駐車場、トイレ、休憩所がある藩境のまち広場は、ここにこられた方が快適に過ごせるよう９時〜17時に開放されています。休憩所の中には、このまちの歴史などを紹介する掲示や、散策マップもありますよ。',
+    rating: 4.3,
+    coupon: false
+  }
+  {
     id: 'shobunsu-takahashi-house',
     name: '庄分酢・高橋家住宅',
     lat: 33.206570636634964,
