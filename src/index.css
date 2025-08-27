@@ -197,11 +197,22 @@ body {
 .custom-marker {
   background: transparent !important;
   border: none !important;
+  z-index: 10 !important;
 }
 
 .current-location-marker {
   background: transparent !important;
   border: none !important;
+  z-index: 10 !important;
+}
+
+/* Leaflet コントロールのz-index調整 */
+.leaflet-control-container {
+  z-index: 20 !important;
+}
+
+.leaflet-popup {
+  z-index: 30 !important;
 }
 
 /* 現在地マーカーのパルスアニメーション */
