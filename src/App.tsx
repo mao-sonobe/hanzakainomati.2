@@ -876,7 +876,6 @@ function App() {
           {isMobile ? (
             renderContent()
           ) : (
-            <div className="grid grid-cols-12 gap-8">
             <div className="grid grid-cols-12 gap-4">
               {/* Desktop Sidebar Navigation */}
               <div className="col-span-3">
