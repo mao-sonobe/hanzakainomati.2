@@ -1064,7 +1064,7 @@ function App() {
         {isMobile && (
           <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md">
             <div className="bg-white border-t border-gray-200 px-2 py-2">
-              <div className="grid grid-cols-6 gap-1">
+              <div className="grid grid-cols-7 gap-0.5">
                 {navigationItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = activeTab === item.id;
@@ -1072,14 +1072,14 @@ function App() {
                     <button
                       key={item.id}
                       onClick={() => setActiveTab(item.id)}
-                      className={`flex flex-col items-center py-2 px-1 rounded-lg transition-colors ${
+                      className={`flex flex-col items-center py-1.5 px-0.5 rounded transition-colors ${
                         isActive 
                           ? 'bg-indigo-100 text-indigo-700' 
                           : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
                       }`}
                     >
-                      <Icon className={`w-5 h-5 mb-1 ${isActive ? 'text-indigo-700' : 'text-gray-600'}`} />
-                      <span className="text-xs font-medium">{item.label}</span>
+                      <Icon className={`w-4 h-4 mb-0.5 ${isActive ? 'text-indigo-700' : 'text-gray-600'}`} />
+                      <span className="text-xs font-medium leading-tight">{item.label}</span>
                     </button>
                   );
                 })}
