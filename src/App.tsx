@@ -5,6 +5,7 @@ import TextToSpeech from './components/TextToSpeech';
 import GoogleMapsButton from './components/GoogleMapsButton';
 import RoutePlanner from './components/RoutePlanner';
 import { touristSpotsData, TouristSpot } from './data/touristSpots';
+import { diningSpots, DiningSpot } from './data/diningSpots';
 import { RoutePlan } from './utils/routePlanning';
 import { calculateDistance, isWithinRadius, formatDistance } from './utils/distance';
 
@@ -140,10 +141,6 @@ function App() {
 
   const touristSpots = [
     // 現在地周辺のスポットが動的に追加される
-  ];
-
-  const diningSpots = [
-    // 現在地周辺の飲食店が動的に追加される
   ];
 
   const bicycleStations = [
@@ -709,20 +706,73 @@ function App() {
     <div className="space-y-4">
       <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-4 border-2 border-orange-200 washi-texture">
         <h2 className="text-lg font-bold text-gray-800 mb-2">飲食店・グルメ</h2>
-        <p className="text-sm text-gray-600">口コミでクーポンを獲得しよう</p>
+        <p className="text-sm text-gray-600 mb-3">地元の美味しいお店を発見しよう</p>
+        <OpenStreetMap 
+          spots={diningSpots.map(spot => ({
+            ...spot,
+            type: spot.type === 'restaurant' ? 'cafe' as const : 
+                  spot.type === 'cafe' ? 'cafe' as const :
+                  spot.type === 'sweets' ? 'cafe' as const :
+                  'cafe' as const,
+            stamps: 0,
+            difficulty: spot.cuisine
+          }))}
+          onSpotClick={(spot) => {
+            const diningSpot = diningSpots.find(d => d.id === spot.id);
+            if (diningSpot) {
+              setSelectedSpot({
+                ...spot,
+                description: diningSpot.description,
+                rating: diningSpot.rating
+              });
+            }
+          }}
+          userLocation={userLocation}
+        />
       </div>
 
+      {selectedSpot && diningSpots.find(d => d.id === selectedSpot.id) && (
+        <div className="japanese-card p-4 border-l-4 border-orange-600">
+          <h3 className="font-semibold text-gray-800 mb-2">選択中の飲食店</h3>
+          <div className="flex justify-between items-start">
+            <div className="flex-1">
+              <h4 className="font-medium text-gray-800">{selectedSpot.name}</h4>
+              <p className="text-sm text-gray-600 mt-1">{selectedSpot.description}</p>
+              {selectedSpot.rating && (
+                <div className="flex items-center mt-2">
+                  <Star className="w-4 h-4 text-yellow-500 mr-1" />
+                  <span className="text-sm font-medium">{selectedSpot.rating}</span>
+                </div>
+              )}
+            </div>
+            <button 
+              onClick={() => setSelectedSpot(null)}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="space-y-3">
+        <h3 className="font-semibold text-gray-800 bamboo-border pl-3 mb-2">飲食店一覧</h3>
         {diningSpots.map((restaurant, index) => (
-          <div key={index} className="japanese-card p-4">
+          <div key={restaurant.id} className="japanese-card p-4">
             <div className="flex justify-between items-start mb-2">
               <div className="flex-1">
                 <h4 className="font-medium text-gray-800">{restaurant.name}</h4>
                 <p className="text-sm text-gray-600 mt-1">{restaurant.cuisine}</p>
-                <p className="text-xs text-gray-500 mt-1">{restaurant.distance}</p>
+                <p className="text-sm text-gray-600 mt-2 leading-relaxed">{restaurant.description}</p>
+                {restaurant.price_range && (
+                  <p className="text-xs text-gray-500 mt-1">価格帯: {restaurant.price_range}</p>
+                )}
+                {restaurant.opening_hours && (
+                  <p className="text-xs text-gray-500">営業時間: {restaurant.opening_hours}</p>
+                )}
                 <div className="flex items-center mt-2">
                   <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                  <span className="text-sm font-medium">{restaurant.rating}</span>
+                  <span className="text-sm font-medium">{restaurant.rating || 4.0}</span>
                   {restaurant.coupon && (
                     <span className="ml-2 bg-red-100 text-red-800 text-xs px-2 py-1 rounded stamp-effect">
                       クーポンあり
@@ -732,12 +782,12 @@ function App() {
               </div>
               <Coffee className="w-5 h-5 text-orange-600" />
             </div>
-            <div className="flex space-x-2">
+            
+            {/* Google Mapsボタンとナビボタン */}
+            <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-100">
+              <GoogleMapsButton lat={restaurant.lat} lng={restaurant.lng} name={restaurant.name} />
               <button className="flex-1 bg-orange-600 text-white py-2 px-3 rounded text-sm hover:bg-orange-700 transition-colors">
                 口コミ投稿
-              </button>
-              <button className="flex-1 border border-orange-600 text-orange-600 py-2 px-3 rounded text-sm hover:bg-orange-50 transition-colors">
-                詳細を見る
               </button>
             </div>
           </div>
@@ -749,8 +799,8 @@ function App() {
         <div className="space-y-2">
           <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg border border-yellow-200">
             <div>
-              <p className="text-sm font-medium">庄分酢・高橋家住宅</p>
-              <p className="text-xs text-gray-600">庄分酢商品 15%OFF</p>
+              <p className="text-sm font-medium">庄分酢レストラン</p>
+              <p className="text-xs text-gray-600">お食事代 15%OFF</p>
               <p className="text-xs text-gray-500">有効期限: 2024/03/31</p>
             </div>
             <button className="hanko-button w-12 h-12 text-xs font-bold text-yellow-600">使用</button>
