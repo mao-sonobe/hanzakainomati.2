@@ -6,6 +6,7 @@ import GoogleMapsButton from './components/GoogleMapsButton';
 import RoutePlanner from './components/RoutePlanner';
 import { touristSpotsData, TouristSpot } from './data/touristSpots';
 import { diningSpots, DiningSpot } from './data/diningSpots';
+import { bicycleStations, BicycleStation } from './data/bicycleStations';
 import { RoutePlan } from './utils/routePlanning';
 import { calculateDistance, isWithinRadius, formatDistance } from './utils/distance';
 
@@ -525,81 +526,120 @@ function App() {
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 border-2 border-green-200 washi-texture">
         <h2 className="text-lg font-bold text-gray-800 mb-2">自転車シェア</h2>
         <p className="text-sm text-gray-600 mb-3">エコな移動で藩境のまちを巡ろう</p>
-      </div>
-
-      {/* 自転車ルートマップ */}
-      <div className="japanese-card p-4">
-        <div className="flex justify-between items-center mb-3">
-          <h3 className="font-semibold text-gray-800">自転車ルートマップ</h3>
-          <Bicycle className="w-5 h-5 text-green-600" />
-        </div>
         <OpenStreetMap 
-          spots={touristSpotsData.filter(spot => spot.type !== 'convenience')} 
-          onSpotClick={(spot) => setSelectedSpot(spot)}
+          spots={bicycleStations.map(station => ({
+            id: station.id,
+            name: station.name,
+            lat: station.lat,
+            lng: station.lng,
+            type: 'convenience' as const,
+            stamps: 0,
+            difficulty: `${station.type === 'electric' ? '電動アシスト' : station.type === 'city' ? 'シティサイクル' : 'スポーツバイク'} • ${station.available_bikes}/${station.total_capacity}台`,
+            description: station.description,
+            rating: undefined,
+            coupon: false
+          }))}
+          onSpotClick={(spot) => {
+            const station = bicycleStations.find(s => s.id === spot.id);
+            if (station) {
+              setSelectedSpot({
+                ...spot,
+                description: station.description
+              });
+            }
+          }}
           userLocation={userLocation}
         />
-        <div className="mt-2 text-xs text-gray-500">
-          🚲 自転車でのおすすめルートを表示
-        </div>
       </div>
+
+      {selectedSpot && bicycleStations.find(s => s.id === selectedSpot.id) && (
+        <div className="japanese-card p-4 border-l-4 border-green-600">
+          <h3 className="font-semibold text-gray-800 mb-2">選択中のステーション</h3>
+          <div className="flex justify-between items-start">
+            <div className="flex-1">
+              <h4 className="font-medium text-gray-800">{selectedSpot.name}</h4>
+              <p className="text-sm text-gray-600 mt-1">{selectedSpot.description}</p>
+              {(() => {
+                const station = bicycleStations.find(s => s.id === selectedSpot.id);
+                return station && (
+                  <div className="mt-2">
+                    <div className="flex items-center space-x-4 text-sm">
+                      <span className={`px-2 py-1 rounded text-xs ${
+                        station.status === 'available' ? 'bg-green-100 text-green-800' :
+                        station.status === 'full' ? 'bg-red-100 text-red-800' :
+                        'bg-yellow-100 text-yellow-800'
+                      }`}>
+                        {station.status === 'available' ? '利用可能' :
+                         station.status === 'full' ? '満車' : 'メンテナンス中'}
+                      </span>
+                      <span className="text-gray-600">
+                        {station.available_bikes}/{station.total_capacity}台
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {station.features.map((feature, index) => (
+                        <span key={index} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+            <button 
+              onClick={() => setSelectedSpot(null)}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">利用可能ステーション</h3>
         <div className="space-y-3">
-          {/* 仮想的な自転車ステーション */}
-          <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-            <div className="flex-1">
-              <div className="flex items-center mb-1">
-                <p className="font-medium">藩境のまち広場ステーション</p>
-                <Bicycle className="w-4 h-4 text-green-600 ml-2" />
+          {bicycleStations.map((station) => (
+            <div key={station.id} className={`flex justify-between items-center p-3 rounded-lg ${
+              station.status === 'available' ? 'bg-blue-50' :
+              station.status === 'full' ? 'bg-gray-100' :
+              'bg-yellow-50'
+            }`}>
+              <div className="flex-1">
+                <div className="flex items-center mb-1">
+                  <p className="font-medium">{station.name}</p>
+                  <Bicycle className={`w-4 h-4 ml-2 ${
+                    station.status === 'available' ? 'text-green-600' :
+                    station.status === 'full' ? 'text-gray-400' :
+                    'text-yellow-600'
+                  }`} />
+                </div>
+                <p className="text-sm text-gray-600">
+                  {station.type === 'electric' ? '電動アシスト' :
+                   station.type === 'city' ? 'シティサイクル' :
+                   'スポーツバイク'} • 徒歩{Math.floor(Math.random() * 8) + 2}分
+                </p>
+                <p className="text-xs text-gray-500">
+                  利用可能: {station.available_bikes}/{station.total_capacity}台
+                  {station.status === 'full' && '（満車）'}
+                  {station.status === 'maintenance' && '（メンテナンス中）'}
+                </p>
               </div>
-              <p className="text-sm text-gray-600">
-                電動アシスト • 徒歩2分
-              </p>
-              <p className="text-xs text-gray-500">
-                利用可能: 5/8台
-              </p>
+              <button 
+                className={`px-4 py-2 rounded transition-colors ${
+                  station.status === 'available' 
+                    ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                    : 'bg-gray-400 text-white cursor-not-allowed'
+                }`}
+                disabled={station.status !== 'available'}
+              >
+                {station.status === 'available' ? '予約' :
+                 station.status === 'full' ? '満車' :
+                 'メンテナンス中'}
+              </button>
             </div>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-              予約
-            </button>
-          </div>
-          
-          <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-            <div className="flex-1">
-              <div className="flex items-center mb-1">
-                <p className="font-medium">小保八幡神社前ステーション</p>
-                <Bicycle className="w-4 h-4 text-green-600 ml-2" />
-              </div>
-              <p className="text-sm text-gray-600">
-                シティサイクル • 徒歩5分
-              </p>
-              <p className="text-xs text-gray-500">
-                利用可能: 3/6台
-              </p>
-            </div>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-              予約
-            </button>
-          </div>
-          
-          <div className="flex justify-between items-center p-3 bg-gray-100 rounded-lg">
-            <div className="flex-1">
-              <div className="flex items-center mb-1">
-                <p className="font-medium">榎津駅前ステーション</p>
-                <Bicycle className="w-4 h-4 text-gray-400 ml-2" />
-              </div>
-              <p className="text-sm text-gray-600">
-                電動アシスト • 徒歩8分
-              </p>
-              <p className="text-xs text-gray-500">
-                利用可能: 0/10台（満車）
-              </p>
-            </div>
-            <button className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed" disabled>
-              満車
-            </button>
-          </div>
+          ))}
         </div>
       </div>
 
