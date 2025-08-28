@@ -600,18 +600,31 @@ function App() {
       <div className="japanese-card p-4">
         <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">利用可能ステーション</h3>
         <div className="space-y-3">
-          {bicycleStations.map((station) => (
+          {bicycleStations.map((station) => {
+            // 候補地の場合は利用可能として表示
+            const displayStatus = station.id.includes('candidate') ? 'available' : station.status;
+            const displayAvailable = station.id.includes('candidate') ? Math.floor(Math.random() * 5) + 3 : station.available_bikes;
+            const displayCapacity = station.id.includes('candidate') ? station.total_capacity : station.total_capacity;
+            
+            return (
             <div key={station.id} className={`flex justify-between items-center p-3 rounded-lg ${
-              station.status === 'available' ? 'bg-blue-50' :
-              station.status === 'full' ? 'bg-gray-100' :
+              displayStatus === 'available' ? 'bg-blue-50' :
+              displayStatus === 'full' ? 'bg-gray-100' :
               'bg-yellow-50'
             }`}>
               <div className="flex-1">
                 <div className="flex items-center mb-1">
-                  <p className="font-medium">{station.name}</p>
+                  <p className="font-medium">
+                    {station.name}
+                    {station.id.includes('candidate') && (
+                      <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">
+                        新設
+                      </span>
+                    )}
+                  </p>
                   <Bicycle className={`w-4 h-4 ml-2 ${
-                    station.status === 'available' ? 'text-green-600' :
-                    station.status === 'full' ? 'text-gray-400' :
+                    displayStatus === 'available' ? 'text-green-600' :
+                    displayStatus === 'full' ? 'text-gray-400' :
                     'text-yellow-600'
                   }`} />
                 </div>
@@ -619,27 +632,36 @@ function App() {
                   {station.type === 'electric' ? '電動アシスト' :
                    station.type === 'city' ? 'シティサイクル' :
                    'スポーツバイク'} • 徒歩{Math.floor(Math.random() * 8) + 2}分
+                  {station.id.includes('candidate') && ' • 新規オープン'}
                 </p>
                 <p className="text-xs text-gray-500">
-                  利用可能: {station.available_bikes}/{station.total_capacity}台
-                  {station.status === 'full' && '（満車）'}
-                  {station.status === 'maintenance' && '（メンテナンス中）'}
+                  利用可能: {displayAvailable}/{displayCapacity}台
+                  {displayStatus === 'full' && '（満車）'}
+                  {station.id.includes('candidate') && '（新設記念キャンペーン中）'}
                 </p>
               </div>
               <button 
                 className={`px-4 py-2 rounded transition-colors ${
-                  station.status === 'available' 
+                  displayStatus === 'available' 
                     ? 'bg-blue-600 text-white hover:bg-blue-700' 
                     : 'bg-gray-400 text-white cursor-not-allowed'
                 }`}
-                disabled={station.status !== 'available'}
+                disabled={displayStatus !== 'available'}
+                onClick={() => {
+                  if (station.id.includes('candidate')) {
+                    alert(`🎉 ${station.name}で自転車を予約しました！\n新設記念で初回30分無料です。`);
+                  } else {
+                    alert(`${station.name}で自転車を予約しました！`);
+                  }
+                }}
               >
-                {station.status === 'available' ? '予約' :
-                 station.status === 'full' ? '満車' :
+                {displayStatus === 'available' ? (station.id.includes('candidate') ? '予約（無料）' : '予約') :
+                 displayStatus === 'full' ? '満車' :
                  'メンテナンス中'}
               </button>
             </div>
-          ))}
+          );
+          })}
         </div>
       </div>
 
