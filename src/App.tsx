@@ -534,7 +534,7 @@ function App() {
             lng: station.lng,
             type: 'convenience' as const,
             stamps: 0,
-            difficulty: `${station.type === 'electric' ? '電動アシスト' : station.type === 'city' ? 'シティサイクル' : 'スポーツバイク'} • ${station.available_bikes}/${station.total_capacity}台`,
+            difficulty: `${station.type === 'electric' ? '電動アシスト' : station.type === 'city' ? 'シティサイクル' : 'スポーツバイク'} • ${station.available_bikes}/${station.total_capacity}台 • ${station.status === 'available' ? '利用可能' : station.status === 'full' ? '満車' : 'メンテナンス中'}`,
             description: station.description,
             rating: undefined,
             coupon: false
