@@ -984,7 +984,7 @@ function App() {
                   fontFamily: "'Noto Serif JP', serif",
                   textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
                 }}>
-                  藩境のまち
+                  藩境のまちめぐり
                 </h1>
                 <p className={`${isMobile ? 'text-xs' : 'text-sm'} text-white opacity-90 tracking-wide`} style={{
                   fontFamily: "'Noto Serif JP', serif"
