@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { Map, MapPin, Camera, Recycle as Bicycle, Coffee, Star, Award, Navigation, Store, Clock, Users, CheckCircle } from 'lucide-react';
+import { Map, MapPin, Recycle as Bicycle, Coffee, Star, Award, Navigation, Store, Users, CheckCircle } from 'lucide-react';
 import OpenStreetMap from './components/OpenStreetMap';
 import TextToSpeech from './components/TextToSpeech';
 import GoogleMapsButton from './components/GoogleMapsButton';
 import RoutePlanner from './components/RoutePlanner';
 import { touristSpotsData, TouristSpot } from './data/touristSpots';
-import { diningSpots, DiningSpot } from './data/diningSpots';
-import { bicycleStations, BicycleStation } from './data/bicycleStations';
+import { diningSpots } from './data/diningSpots';
+import { bicycleStations } from './data/bicycleStations';
 import { RoutePlan } from './utils/routePlanning';
 import { calculateDistance, isWithinRadius, formatDistance } from './utils/distance';
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [userStamps, setUserStamps] = useState(0);
-  const [userCoupons, setUserCoupons] = useState(1);
+  const [userCoupons] = useState(1);
   const [visitedSpots, setVisitedSpots] = useState<Set<string>>(new Set());
   const [collectedStamps, setCollectedStamps] = useState<{ [key: string]: { timestamp: Date; stamps: number } }>({});
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -92,39 +92,40 @@ function App() {
       }
       return;
     }
-    
+
     // 現在地が取得できない場合
     if (!userLocation) {
       console.warn('現在地を取得できません。位置情報を許可してください。');
       return;
     }
-    
+
     // 50メートル以内にいるかチェック
     const distance = calculateDistance(userLocation, { lat: spot.lat, lng: spot.lng });
     const isNearby = isWithinRadius(userLocation, { lat: spot.lat, lng: spot.lng }, 50);
-    
+
     if (!isNearby) {
       console.warn(`スタンプを獲得するには${spot.name}から50m以内に近づく必要があります。現在の距離: ${formatDistance(distance)}`);
       return;
     }
-    
+
     const newVisitedSpots = new Set(visitedSpots);
     newVisitedSpots.add(spot.id);
     setVisitedSpots(newVisitedSpots);
-    
+
+    const stamps = spot.stamps ?? 0;
     const newCollectedStamps = {
       ...collectedStamps,
       [spot.id]: {
         timestamp: new Date(),
-        stamps: spot.stamps
+        stamps: stamps
       }
     };
     setCollectedStamps(newCollectedStamps);
-    
-    setUserStamps(prev => prev + spot.stamps);
-    
+
+    setUserStamps(prev => prev + stamps);
+
     // 成功メッセージ表示
-    console.log(`🎉 ${spot.name}でスタンプを獲得しました！総獲得数: ${userStamps + spot.stamps}個`);
+    console.log(`🎉 ${spot.name}でスタンプを獲得しました！総獲得数: ${userStamps + stamps}個`);
   };
 
   // スポットが訪問済みかチェック
@@ -140,13 +141,7 @@ function App() {
     { id: 'mypage', icon: Users, label: 'マイページ' },
   ];
 
-  const touristSpots = [
-    // 現在地周辺のスポットが動的に追加される
-  ];
 
-  const bicycleStations = [
-    // 現在地周辺の自転車ステーションが動的に追加される
-  ];
 
   const renderHomeContent = () => (
     <div className="space-y-6">
@@ -322,8 +317,6 @@ function App() {
                             console.warn('現在地を取得できません。位置情報を許可してください。');
                             return;
                           }
-                          const distance = calculateDistance(userLocation, { lat: spot.lat, lng: spot.lng });
-                          const isNearby = isWithinRadius(userLocation, { lat: spot.lat, lng: spot.lng }, 50);
                           collectStamp(spot);
                         }}
                         className={`px-3 py-1 rounded text-sm transition-colors ${
@@ -524,7 +517,7 @@ function App() {
   const renderBicycleContent = () => (
     <div className="space-y-4">
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 border-2 border-green-200 washi-texture">
-        <h2 className="text-lg font-bold text-gray-800 mb-2">自転車シェア</h2>
+            <h2 className="text-lg font-bold text-gray-800 mb-2">自転車シェア</h2>
         <p className="text-sm text-gray-600 mb-3">エコな移動で藩境のまちを巡ろう</p>
         <OpenStreetMap 
           spots={bicycleStations.map(station => ({
@@ -577,7 +570,7 @@ function App() {
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-1 mt-2">
-                      {station.features.map((feature, index) => (
+                      {station.features.map((feature: string, index: number) => (
                         <span key={index} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
                           {feature}
                         </span>
@@ -833,7 +826,7 @@ function App() {
 
       <div className="space-y-3">
         <h3 className="font-semibold text-gray-800 bamboo-border pl-3 mb-2">飲食店一覧</h3>
-        {diningSpots.map((restaurant, index) => (
+  {diningSpots.map((restaurant) => (
           <div key={restaurant.id} className="japanese-card p-4">
             <div className="flex justify-between items-start mb-2">
               <div className="flex-1">
