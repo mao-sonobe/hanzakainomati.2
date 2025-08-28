@@ -755,6 +755,20 @@ function App() {
         </div>
       )}
 
+      <div className="japanese-card p-4">
+        <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">獲得クーポン</h3>
+        <div className="space-y-2">
+          <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+            <div>
+              <p className="text-sm font-medium">庄分酢レストラン</p>
+              <p className="text-xs text-gray-600">お食事代 15%OFF</p>
+              <p className="text-xs text-gray-500">有効期限: 2024/03/31</p>
+            </div>
+            <button className="hanko-button w-12 h-12 text-xs font-bold text-yellow-600">使用</button>
+          </div>
+        </div>
+      </div>
+
       <div className="space-y-3">
         <h3 className="font-semibold text-gray-800 bamboo-border pl-3 mb-2">飲食店一覧</h3>
         {diningSpots.map((restaurant, index) => (
@@ -792,20 +806,6 @@ function App() {
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="japanese-card p-4">
-        <h3 className="font-semibold mb-3 text-gray-800 bamboo-border pl-3">獲得クーポン</h3>
-        <div className="space-y-2">
-          <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-            <div>
-              <p className="text-sm font-medium">庄分酢レストラン</p>
-              <p className="text-xs text-gray-600">お食事代 15%OFF</p>
-              <p className="text-xs text-gray-500">有効期限: 2024/03/31</p>
-            </div>
-            <button className="hanko-button w-12 h-12 text-xs font-bold text-yellow-600">使用</button>
-          </div>
-        </div>
       </div>
     </div>
   );
