@@ -201,7 +201,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
 
       window.speechSynthesis.speak(utterance);
     } else {
-      alert('お使いのブラウザは音声読み上げ機能をサポートしていません。');
+      console.warn('お使いのブラウザは音声読み上げ機能をサポートしていません。');
     }
   };
 

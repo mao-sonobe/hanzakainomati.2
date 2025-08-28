@@ -104,11 +104,11 @@ const LocationButton: React.FC<{ onLocationFound?: (lat: number, lng: number) =>
             .openPopup();
         },
         () => {
-          alert('現在地を取得できませんでした。位置情報の許可を確認してください。');
+          console.warn('現在地を取得できませんでした:', error.message);
         }
       );
     } else {
-      alert('このブラウザは位置情報をサポートしていません');
+      console.warn('このブラウザは位置情報をサポートしていません');
     }
   };
 

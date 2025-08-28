@@ -60,7 +60,7 @@ function App() {
           });
         },
         (error) => {
-          console.log('位置情報の取得に失敗しました:', error.message);
+          console.warn('位置情報の取得に失敗しました:', error.message);
           // 位置情報が取得できない場合は旧吉原家住宅をデフォルトに設定
           setUserLocation({
             lat: 33.20676490535196,
@@ -93,7 +93,7 @@ function App() {
     
     // 現在地が取得できない場合
     if (!userLocation) {
-      alert('現在地を取得できません。位置情報を許可してください。');
+      console.warn('現在地を取得できません。位置情報を許可してください。');
       return;
     }
     
@@ -102,7 +102,7 @@ function App() {
     const isNearby = isWithinRadius(userLocation, { lat: spot.lat, lng: spot.lng }, 50);
     
     if (!isNearby) {
-      alert(`スタンプを獲得するには${spot.name}から50m以内に近づく必要があります。\n現在の距離: ${formatDistance(distance)}`);
+      console.warn(`スタンプを獲得するには${spot.name}から50m以内に近づく必要があります。現在の距離: ${formatDistance(distance)}`);
       return;
     }
     
@@ -122,7 +122,7 @@ function App() {
     setUserStamps(prev => prev + spot.stamps);
     
     // 成功メッセージ表示
-    alert(`🎉 ${spot.name}でスタンプを獲得しました！\n総獲得数: ${userStamps + spot.stamps}個`);
+    console.log(`🎉 ${spot.name}でスタンプを獲得しました！総獲得数: ${userStamps + spot.stamps}個`);
   };
 
   // スポットが訪問済みかチェック
@@ -321,7 +321,7 @@ function App() {
                       <button
                         onClick={() => {
                           if (!userLocation) {
-                            alert('現在地を取得できません。位置情報を許可してください。');
+                            console.warn('現在地を取得できません。位置情報を許可してください。');
                             return;
                           }
                           const distance = calculateDistance(userLocation, { lat: spot.lat, lng: spot.lng });
